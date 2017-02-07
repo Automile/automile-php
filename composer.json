@@ -1,0 +1,33 @@
+{
+    "name": "automile/automile-php",
+    "description": "Automile API SDK",
+    "keywords": [
+        "php",
+        "sdk",
+        "api"
+    ],
+    "homepage": "https://github.com/Automile/automile-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Automile <support@automile.com>",
+            "homepage": "https://automile.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8"
+    },
+    "autoload": {
+        "psr-4": { "Automile\\Sdk\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Automile\\Sdk\\Tests\\" : "tests/" }
+    },
+    "version": "0.0.6"
+}
