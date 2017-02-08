@@ -75,7 +75,11 @@ class Curl implements ClientInterface
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $request->getHeaders());
+        $headers = [];
+        foreach ($request->getHeaders() as $header => $value) {
+            $headers[] = "{$header}: {$value}";
+        }
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
         switch ($request->getMethod()) {
             case Config::METHOD_GET:

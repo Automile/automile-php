@@ -23,7 +23,7 @@ abstract class ModelAbstract
     /**
      * @param array|object $properties array or object to load properties from
      */
-    public function __construct($properties)
+    public function __construct($properties = [])
     {
         foreach ($properties as $key => $value) {
             if (!in_array($key, $this->_allowedProperties)) {

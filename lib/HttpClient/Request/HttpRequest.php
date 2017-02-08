@@ -23,7 +23,7 @@ class HttpRequest implements RequestInterface
     /**
      * @var string
      */
-    private $_method = 'GET';
+    private $_method = 'get';
 
     /**
      * @var array
@@ -92,12 +92,25 @@ class HttpRequest implements RequestInterface
     }
 
     /**
+     * @param string $header
+     * @return RequestInterface
+     */
+    public function unsetHeader($header)
+    {
+        if (array_key_exists($header, $this->_headers)) {
+            unset($this->_headers[$header]);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string $method e.g. GET, POST, PUT, DELETE
      * @return RequestInterface
      */
     public function setMethod($method)
     {
-        $this->_method = strtolower($method);
+        $this->_method = $method;
         return $this;
     }
 
@@ -106,7 +119,7 @@ class HttpRequest implements RequestInterface
      */
     public function getMethod()
     {
-        return $this->_method;
+        return strtolower($this->_method);
     }
 
     /**
@@ -201,5 +214,26 @@ class HttpRequest implements RequestInterface
     public function getUserAgent()
     {
         return $this->getHeader('User-Agent');
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return RequestInterface
+     */
+    public function setHttpAuth($username, $password)
+    {
+        $hash = base64_encode($username . ':' . $password);
+        $this->setHeader('Authorization', "Basic {$hash}");
+
+        return $this;
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function unsetHttpAuth()
+    {
+        $this->unsetHeader('Authorization');
     }
 }

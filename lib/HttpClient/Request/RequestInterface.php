@@ -45,6 +45,12 @@ interface RequestInterface
     public function getHeaders();
 
     /**
+     * @param string $header
+     * @return RequestInterface
+     */
+    public function unsetHeader($header);
+
+    /**
      * @param string $userAgent
      * @return RequestInterface
      */
@@ -54,6 +60,18 @@ interface RequestInterface
      * @return string
      */
     public function getUserAgent();
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return RequestInterface
+     */
+    public function setHttpAuth($username, $password);
+
+    /**
+     * @return RequestInterface
+     */
+    public function unsetHttpAuth();
 
     /**
      * @param string $method e.g. GET, POST, PUT, DELETE
