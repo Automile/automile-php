@@ -2,17 +2,15 @@
 
 namespace Automile\Sdk;
 
-use Automile\Sdk\HttpClient\ClientInterface;
-use Automile\Sdk\HttpClient\Curl;
-use Automile\Sdk\HttpClient\Request\HttpRequest;
 use Automile\Sdk\HttpClient\Request\RequestInterface;
-use Automile\Sdk\HttpClient\Response\JsonResponse;
-use Automile\Sdk\HttpClient\Response\ResponseInterface;
 use Automile\Sdk\Models\User;
 use Automile\Sdk\OAuth\Http as OAuthHttp;
 use Automile\Sdk\OAuth\Token;
 use Automile\Sdk\Storage\Filesystem;
 use Automile\Sdk\Storage\StorageInterface;
+
+use Automile\Sdk\Endpoints\SignUp;
+use Automile\Sdk\Endpoints\Vehicle;
 
 /**
  * Automile PHP SDK Facade object
@@ -21,6 +19,8 @@ use Automile\Sdk\Storage\StorageInterface;
  */
 class AutomileClient
 {
+
+    use SignUp, Vehicle;
 
     /**
      * @var User
@@ -80,34 +80,6 @@ class AutomileClient
     }
 
     /**
-     * @param string $email
-     * @return User
-     * @throws AutomileException
-     */
-    public static function signUp($email)
-    {
-        if (!$email) {
-            throw new AutomileException('Email is required');
-        }
-
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $request->setUri(Config::URI_SIGNUP)
-            ->setMethod(Config::METHOD_POST)
-            ->setPostParam('email', $email);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new User($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
-    }
-
-    /**
      * @param string|StorageInterface $storage path to the storage file or a storage object itself
      * @return bool
      */
@@ -138,52 +110,9 @@ class AutomileClient
             $storage->setFilePath($path);
         }
 
-        return new self($storage->restore(Token::class));
-    }
+        $token = $storage->restore(Token::class);
 
-    /**
-     * @param string $request
-     * @return AutomileClient
-     * @throws AutomileException
-     */
-    public function setRequestClass($request)
-    {
-        if (!class_exists($request)) {
-            throw new AutomileException("Request class '{$request}' not found");
-        }
-
-        $this->_requestClass = $request;
-        return $this;
-    }
-
-    /**
-     * @param string $response
-     * @return AutomileClient
-     * @throws AutomileException
-     */
-    public function setResponseClass($response)
-    {
-        if (!class_exists($response)) {
-            throw new AutomileException("Response class '{$response}' not found");
-        }
-
-        $this->_responseClass = $response;
-        return $this;
-    }
-
-    /**
-     * @param string $httpClient
-     * @return AutomileClient
-     * @throws AutomileException
-     */
-    public function setHttpClientClass($httpClient)
-    {
-        if (!class_exists($httpClient)) {
-            throw new AutomileException("HTTP Client class '{$httpClient}' not found");
-        }
-
-        $this->_httpClientClass = $httpClient;
-        return $this;
+        return $token ? new self($token) : new self();
     }
 
     /**
@@ -192,6 +121,8 @@ class AutomileClient
      */
     private function _createToken(User $user)
     {
+        $this->_tokenRefreshed = true;
+
         $http = new OAuthHttp(Config::getNewHttpClient(), Config::getNewRequest(), Config::getNewResponse());
         return $http->createToken($user);
     }
@@ -208,6 +139,23 @@ class AutomileClient
         $this->_tokenRefreshed = $newToken->getAccessToken() != $token->getAccessToken();
 
         return $newToken;
+    }
+
+    /**
+     * set access token to perform API requests
+     * @param RequestInterface $request
+     * @return RequestInterface
+     * @throws AutomileException
+     */
+    private function _authorizeRequest(RequestInterface $request)
+    {
+        if (null === $this->_token || !$this->_token->getAccessToken()) {
+            throw new AutomileException('Access token is undefined');
+        }
+
+        $request->setBearerAuth($this->_token->getAccessToken());
+
+        return $request;
     }
 
 }

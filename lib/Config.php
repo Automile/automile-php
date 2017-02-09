@@ -20,7 +20,6 @@ class Config
 
     const URL = 'https://api.automile.com';
 
-    const URI_SIGNUP = 'signup';
     const URI_OAUTH_TOKEN = 'OAuth2/Token';
 
     const METHOD_POST = 'post';

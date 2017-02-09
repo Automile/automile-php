@@ -37,11 +37,14 @@ class Filesystem implements StorageInterface
 
     /**
      * @param string $storableClass class name of a storable implementation
-     * @return mixed
+     * @return StorableInterface|null
      */
     public function restore($storable)
     {
         $data = $this->_loadData();
+        if (!$data) {
+            return null;
+        }
 
         if (!class_exists($storable)) {
             throw new StorageException("Class '{$storable}' cannot be found");
@@ -84,6 +87,10 @@ class Filesystem implements StorageInterface
     {
         if (!$this->_path) {
             throw new StorageException('File path is required');
+        }
+
+        if (!file_exists($this->_path)) {
+            return [];
         }
 
         $data = file_get_contents($this->_path);

@@ -71,7 +71,13 @@ interface RequestInterface
     /**
      * @return RequestInterface
      */
-    public function unsetHttpAuth();
+    public function unsetAuth();
+
+    /**
+     * @param string $token
+     * @return RequestInterface
+     */
+    public function setBearerAuth($token);
 
     /**
      * @param string $method e.g. GET, POST, PUT, DELETE

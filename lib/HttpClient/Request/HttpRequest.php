@@ -230,10 +230,21 @@ class HttpRequest implements RequestInterface
     }
 
     /**
+     * @param string $token
      * @return RequestInterface
      */
-    public function unsetHttpAuth()
+    public function setBearerAuth($token)
+    {
+        $this->setHeader('Authorization', 'Bearer ' . $token);
+        return $this;
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function unsetAuth()
     {
         $this->unsetHeader('Authorization');
+        return $this;
     }
 }
