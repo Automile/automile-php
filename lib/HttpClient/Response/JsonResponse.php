@@ -12,6 +12,7 @@ class JsonResponse implements ResponseInterface
     const LINE_SEPARATOR = "\r\n";
 
     const SUCCESS_CODE = 200;
+    const CREATED_CODE = 201;
 
     private $_headers = [];
 
@@ -96,6 +97,14 @@ class JsonResponse implements ResponseInterface
     public function isSuccessful()
     {
         return self::SUCCESS_CODE == $this->getStatusCode();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRedirect()
+    {
+        return self::CREATED_CODE == 201 ? $this->getHeader('Location') : null;
     }
 
     /**

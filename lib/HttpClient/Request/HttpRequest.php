@@ -2,6 +2,8 @@
 
 namespace Automile\Sdk\HttpClient\Request;
 
+use Automile\Sdk\Config;
+
 /**
  * Class Http
  * @package Automile\Sdk\HttpClient
@@ -36,11 +38,17 @@ class HttpRequest implements RequestInterface
     private $_paramsPost = [];
 
     /**
+     * @var string
+     */
+    private $_body;
+
+    /**
      * @param string $uri
      * @return RequestInterface
      */
     public function setUri($uri)
     {
+        $uri = str_replace(Config::URL, '', $uri);
         $this->_uri = $uri;
         return $this;
     }
@@ -217,6 +225,24 @@ class HttpRequest implements RequestInterface
     }
 
     /**
+     * @param string $contentType
+     * @return RequestInterface
+     */
+    public function setContentType($contentType)
+    {
+        $this->setHeader('Content-Type', $contentType);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return $this->getHeader('Content-Type');
+    }
+
+    /**
      * @param string $username
      * @param string $password
      * @return RequestInterface
@@ -246,5 +272,35 @@ class HttpRequest implements RequestInterface
     {
         $this->unsetHeader('Authorization');
         return $this;
+    }
+
+    /**
+     * set request body directly
+     * !!! overwrites all previously set post parameters !!!
+     * @param string $body
+     * @return RequestInterface
+     */
+    public function setBody($body)
+    {
+        $this->_body = $body;
+        return $this;
+    }
+
+    /**
+     * get the request body set via setBody() or setPostParam()
+     * setBody() always has the priority, all POST parameters will be ignored if setBody() has been used
+     * @return string
+     */
+    public function getBody()
+    {
+        if ($this->_body) {
+            return $this->_body;
+        }
+
+        if (count($this->_paramsPost)) {
+            return http_build_query($this->_paramsPost);
+        }
+
+        return null;
     }
 }

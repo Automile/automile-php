@@ -80,6 +80,17 @@ interface RequestInterface
     public function setBearerAuth($token);
 
     /**
+     * @param string $contentType
+     * @return RequestInterface
+     */
+    public function setContentType($contentType);
+
+    /**
+     * @return string
+     */
+    public function getContentType();
+
+    /**
      * @param string $method e.g. GET, POST, PUT, DELETE
      * @return RequestInterface
      */
@@ -137,5 +148,20 @@ interface RequestInterface
      * @return array
      */
     public function getPostParams();
+
+    /**
+     * set request body directly
+     * !!! overwrites all previously set post parameters !!!
+     * @param string $body
+     * @return RequestInterface
+     */
+    public function setBody($body);
+
+    /**
+     * get the request body set via setBody() or setPostParam()
+     * setBody() always has the priority, all POST parameters will be ignored if setBody() has been used
+     * @return string
+     */
+    public function getBody();
 
 }

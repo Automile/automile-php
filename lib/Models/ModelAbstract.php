@@ -25,6 +25,26 @@ abstract class ModelAbstract
      */
     public function __construct($properties = [])
     {
+        $this->_setProperties($properties);
+    }
+
+    /**
+     * @param array|object $properties array or object to load properties from
+     * @return ModelAbstract
+     */
+    public function reset($properties = [])
+    {
+        $this->_properties = [];
+        $this->_setProperties($properties);
+        return $this;
+    }
+
+    /**
+     * @param array|object $properties array or object to load properties from
+     * @return ModelAbstract
+     */
+    protected function _setProperties($properties)
+    {
         foreach ($properties as $key => $value) {
             if (!in_array($key, $this->_allowedProperties)) {
                 continue;
@@ -37,6 +57,8 @@ abstract class ModelAbstract
                 $this->_properties[$key] = $value;
             }
         }
+
+        return $this;
     }
 
     /**
@@ -66,6 +88,15 @@ abstract class ModelAbstract
         }
 
         throw new ModelException("Method '{$method}' not found");
+    }
+
+    /**
+     * JSON-encode the model to be sent to the API
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this->_properties);
     }
 
 }

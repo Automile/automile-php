@@ -39,11 +39,24 @@ class Curl implements ClientInterface
         $this->_request = $request;
         $request->setUserAgent(Config::USER_AGENT);
 
+        if (Config::METHOD_POST == $request->getMethod() && !$request->getContentType()) {
+            $request->setContentType('multipart/form-data');
+        }
+
         $this->_curl = $this->_initCurl();
 
         $this->_response = $this->_sendQuery($response);
 
-        return $response->isSuccessful();
+        $redirect = $this->_response->getRedirect();
+        if ($redirect) {
+            $request->setUri($redirect)
+                ->setMethod(Config::METHOD_GET)
+                ->setBody('');
+            $this->_curl = $this->_initCurl();
+            $this->_response = $this->_sendQuery($this->_response);
+        }
+
+        return $this->_response->isSuccessful();
     }
 
     /**
@@ -81,9 +94,11 @@ class Curl implements ClientInterface
         }
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getBody() ?: '');
+
         switch ($request->getMethod()) {
             case Config::METHOD_GET:
-                // do nothing
+                curl_setopt($curl, CURLOPT_HTTPGET, 1);
                 break;
             case Config::METHOD_POST:
                 curl_setopt($curl, CURLOPT_POST, 1);
@@ -95,10 +110,6 @@ class Curl implements ClientInterface
                 break;
             default:
                 throw new HttpClientException("HTTP method '{$request->getMethod()}' is not supported");
-        }
-
-        if ($request->getPostParams()) {
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($request->getPostParams()));
         }
 
         return $curl;

@@ -55,6 +55,11 @@ interface ResponseInterface
     public function isSuccessful();
 
     /**
+     * @return string|null
+     */
+    public function getRedirect();
+
+    /**
      * @return bool
      */
     public function isCompleted();
