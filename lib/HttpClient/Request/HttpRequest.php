@@ -137,7 +137,7 @@ class HttpRequest implements RequestInterface
      */
     public function setUriParam($name, $value)
     {
-        $this->_paramsUri[$name] = $name;
+        $this->_paramsUri[$name] = $value;
         return $this;
     }
 

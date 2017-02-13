@@ -32,7 +32,7 @@ class Curl implements ClientInterface
     /**
      * @param RequestInterface $request
      * @param ResponseInterface $response
-     * @return ResponseInterface
+     * @return bool
      */
     public function send(RequestInterface $request, ResponseInterface $response)
     {

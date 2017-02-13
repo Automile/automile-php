@@ -234,6 +234,4 @@ trait Vehicle
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
-    //public function getVehicleInformation
-
 }

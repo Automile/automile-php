@@ -13,6 +13,7 @@ class JsonResponse implements ResponseInterface
 
     const SUCCESS_CODE = 200;
     const CREATED_CODE = 201;
+    const INTERNAL_ERROR_CODE = 500;
 
     private $_headers = [];
 
@@ -96,7 +97,7 @@ class JsonResponse implements ResponseInterface
      */
     public function isSuccessful()
     {
-        return self::SUCCESS_CODE == $this->getStatusCode();
+        return in_array($this->getStatusCode(), [self::SUCCESS_CODE, self::CREATED_CODE]);
     }
 
     /**
