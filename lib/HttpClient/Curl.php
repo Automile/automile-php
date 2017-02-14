@@ -87,6 +87,7 @@ class Curl implements ClientInterface
 
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_ENCODING, "gzip");
 
         $headers = [];
         foreach ($request->getHeaders() as $header => $value) {

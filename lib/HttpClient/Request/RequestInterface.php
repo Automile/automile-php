@@ -104,13 +104,13 @@ interface RequestInterface
     /**
      * @param string $name
      * @param string|array $value
-     * @return mixed
+     * @return RequestInterface
      */
     public function setUriParam($name, $value);
 
     /**
      * @param array $params
-     * @return mixed
+     * @return RequestInterface
      */
     public function setUriParams(array $params);
 

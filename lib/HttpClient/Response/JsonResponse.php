@@ -126,6 +126,10 @@ class JsonResponse implements ResponseInterface
         }
 
         $body = $this->getBody();
-        return empty($body->Message) ? null : $body->Message;
+        if ($body) {
+            return empty($body->Message) ? null : $body->Message;
+        } else {
+            return $this->getBody(true);
+        }
     }
 }

@@ -11,7 +11,7 @@ use Automile\Sdk\Models\Vehicle2StatusRowset;
 use Automile\Sdk\Models\VehicleCheckIn;
 
 /**
- * Vehicle traint to be used in AutomileClient
+ * Vehicle API methods
  * @package Automile\Sdk\Endpoints
  */
 trait Vehicle
