@@ -47,7 +47,8 @@ class Trip extends ModelAbstract
         "HasDrivingEvents",
         "CustomCategory",
         "HideStartRoute",
-        "HideEndRoute"
+        "HideEndRoute",
+        "LastEditedByContactId"
     ];
 
 }

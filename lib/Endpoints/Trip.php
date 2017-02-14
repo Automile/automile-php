@@ -6,11 +6,14 @@ namespace Automile\Sdk\Endpoints;
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
 use Automile\Sdk\Models\AmbientAirTemperatureRowset;
+use Automile\Sdk\Models\TripConcatenation;
 use Automile\Sdk\Models\TripGeoRowset;
+use Automile\Sdk\Models\TripNote;
 use Automile\Sdk\Models\TripPIDRowset;
 use Automile\Sdk\Models\TripRowset;
 use Automile\Sdk\Models\Trip as TripModel;
 use Automile\Sdk\Models\TripStartEndGeo;
+use Automile\Sdk\Models\TripSynchronized;
 use Automile\Sdk\Models\VehicleEngineCoolantTemperatureRowset;
 use Automile\Sdk\Models\VehicleFuelLevelInputRowset;
 use Automile\Sdk\Models\VehicleRPMRowset;
@@ -290,6 +293,179 @@ trait Trip
 
         if ($isSuccessful) {
             return new TripGeoRowset($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
+    }
+
+    /**
+     * Updates the given trip with a trip type (category) and trip tags
+     * @param TripModel $trip
+     * @return TripModel
+     * @throws AutomileException
+     */
+    public function editTrip(TripModel $trip)
+    {
+        if (!$trip->getTripId()) {
+            throw new AutomileException('Trip ID is empty');
+        }
+
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_PUT)
+            ->setUri($this->_tripUri . '/' . (int)$trip->getTripId())
+            ->setBody($trip->toJson())
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return $trip;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * Updates the last trip with trip notes
+     * @param TripNote $note
+     * @return TripNote
+     * @throws AutomileException
+     */
+    public function addNoteToLastTrip(TripNote $note)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_PUT)
+            ->setUri($this->_tripUri . '/addnotestolasttrip')
+            ->setBody($note->toJson())
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return $note;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * Updates the given trip with given contactid
+     * @param int $tripId
+     * @param int $contactId
+     * @return bool
+     * @throws AutomileException
+     */
+    public function setDriverOnTrip($tripId, $contactId)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_PUT)
+            ->setUri($this->_tripUri . '/setdriverontrip')
+            ->setUriParam('tripId', (int)$tripId)
+            ->setUriParam('contactId', (int)$contactId);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return true;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * Mark trips as synchronized, synchronized trips will not be returned when fetching trips
+     * @param TripSynchronized $model
+     * @return bool
+     * @throws AutomileException
+     */
+    public function setSynchronized(TripSynchronized $model)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_POST)
+            ->setUri($this->_tripUri . '/synchronized')
+            ->setBody($model->toJson())
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return true;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * Get the details about the trip including driving events, speeding and idling
+     * @param int $tripId
+     * @return TripModel
+     * @throws AutomileException
+     */
+    public function getCompletedTripDetails($tripId)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($this->_tripUri . '/' . (int)$tripId . '/details');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return new TripConcatenation($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
+    }
+
+    /**
+     * Get the advanced details about the trip including driving events, speeding, idling, speed and rpm data series
+     * @param int $tripId
+     * @return TripModel
+     * @throws AutomileException
+     */
+    public function getCompletedTripDetailsAdvanced($tripId)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($this->_tripUri . '/' . (int)$tripId . '/advanced');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return new TripConcatenation($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());

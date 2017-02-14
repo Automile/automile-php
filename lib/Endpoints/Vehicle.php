@@ -120,7 +120,7 @@ trait Vehicle
             return true;
         }
 
-        $errorMessage = $response->getErrorMessage() ?: $response->getBody(true);
+        $errorMessage = $response->getErrorMessage();
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
@@ -146,7 +146,7 @@ trait Vehicle
             return true;
         }
 
-        $errorMessage = $response->getErrorMessage() ?: $response->getBody(true);
+        $errorMessage = $response->getErrorMessage();
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
@@ -176,7 +176,7 @@ trait Vehicle
             return $vehicle;
         }
 
-        $errorMessage = $response->getErrorMessage() ?: $response->getBody(true);
+        $errorMessage = $response->getErrorMessage();
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
@@ -230,7 +230,7 @@ trait Vehicle
             return $vehicle;
         }
 
-        $errorMessage = $response->getErrorMessage() ?: $response->getBody(true);
+        $errorMessage = $response->getErrorMessage();
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
