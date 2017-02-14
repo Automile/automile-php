@@ -4,6 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * Abstract class to be inherited by all rowset models
+ * utilizes deferred object instantiation
  * @package Automile\Sdk\Models
  */
 abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
@@ -25,8 +26,10 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
      */
     public function __construct($rows = [])
     {
-        foreach ($rows as $row) {
-            $this->push($this->getModel($row));
+        if ($rows) {
+            foreach ($rows as $row) {
+                $this->push($row);
+            }
         }
     }
 
@@ -73,23 +76,31 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
     }
 
     public function offsetGet($offset) {
-        return isset($this->_models[$offset]) ? $this->_models[$offset] : null;
+        if (isset($this->_models[$offset])) {
+           if (!is_object($this->_models[$offset]) || !$this->_models[$offset] instanceof ModelAbstract) {
+               $this->_models[$offset] = $this->getModel($this->_models[$offset]);
+           }
+
+           return $this->_models[$offset];
+        }
+
+        return null;
     }
 
     /**
-     * @param ModelAbstract $model
+     * @param array|object $row
      * @param null $offset
      * @return ModelRowsetAbstract
      * @throws ModelException
      */
-    public function push(ModelAbstract $model, $offset = null)
+    public function push($row, $offset = null)
     {
         if (is_numeric($offset)) {
-            $this->_models[$offset] = $model;
+            $this->_models[$offset] = $row;
         } elseif ($offset) {
             throw new ModelException("Invalid rowset offset: '{$offset}', only numbers are allowed");
         } else {
-            $this->_models[] = $model;
+            $this->_models[] = $row;
         }
 
         return $this;
