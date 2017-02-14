@@ -12,6 +12,7 @@ use Automile\Sdk\Storage\StorageInterface;
 use Automile\Sdk\Endpoints\SignUp;
 use Automile\Sdk\Endpoints\Vehicle;
 use Automile\Sdk\Endpoints\Trip;
+use Automile\Sdk\Endpoints\Contacts;
 
 /**
  * Automile PHP SDK Facade object
@@ -21,7 +22,7 @@ use Automile\Sdk\Endpoints\Trip;
 class AutomileClient
 {
 
-    use SignUp, Vehicle, Trip;
+    use SignUp, Vehicle, Trip, Contacts;
 
     /**
      * @var User
