@@ -184,6 +184,7 @@ trait Vehicle
      * Removes the given vehicle
      * @param int $id
      * @return bool
+     * @throws AutomileException
      */
     public function deleteVehicle($id)
     {

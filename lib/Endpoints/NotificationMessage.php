@@ -10,7 +10,7 @@ use Automile\Sdk\Models\TriggerMessageHistoryRowset;
  * NotificationMessages API Queries
  * @package Automile\Sdk\Endpoints
  */
-trait NotificationMessages
+trait NotificationMessage
 {
 
     protected $_notificationMessagesUri = '/v1/resourceowner/triggermessageshistory';

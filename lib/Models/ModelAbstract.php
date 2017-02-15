@@ -87,7 +87,7 @@ abstract class ModelAbstract
             }
         }
 
-        throw new ModelException("Method '{$method}' not found");
+        throw new \BadMethodCallException("Method '{$method}' not found");
     }
 
     /**

@@ -4,70 +4,81 @@ namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\GeofenceRowset;
-use Automile\Sdk\Models\Geofence as GeofenceModel;
+use Automile\Sdk\Models\PlaceRowset;
+use Automile\Sdk\Models\Place as PlaceModel;
 
 /**
- * Geofence API Queries
+ * Place API Queries
  * @package Automile\Sdk\Endpoints
  */
-trait Geofence
+trait Place
 {
 
-    private $_geofenceUri = '/v1/resourceowner/geofence';
+    protected $_placeUri = '/v1/resourceowner/place';
 
     /**
-     * Get a list of geofencese user is associated with
-     * @return GeofenceRowset
-     */
-    public function getGeofences()
-    {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_geofenceUri);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new GeofenceRowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
-    }
-
-    public function getGeofenceById($geofenceId)
-    {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_geofenceUri . '/' . (int)$geofenceId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new GeofenceModel($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
-    }
-
-    /**
-     * Get a list of geofencese user is associated with
-     * @param GeofenceModel $geofence
-     * @return GeofenceModel
+     * Get places
+     * @return PlaceRowset
      * @throws AutomileException
      */
-    public function createGeofence(GeofenceModel $geofence)
+    public function getPlaces()
     {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($this->_placeUri);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return new PlaceRowset($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
+    }
+
+    /**
+     * Get place
+     * @param int $placeId
+     * @return PlaceModel
+     * @throws AutomileException
+     */
+    public function getPlaceById($placeId)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($this->_placeUri . '/' . (int)$placeId);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return new PlaceModel($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
+    }
+
+    /**
+     * Creates a new place
+     * @param PlaceModel $place
+     * @return PlaceModel
+     * @throws AutomileException
+     */
+    public function createPlace(PlaceModel $place)
+    {
+        if (!$place->isValid()) {
+            throw new AutomileException("Model is invalid");
+        }
+
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
         $client = Config::getNewHttpClient();
@@ -75,15 +86,15 @@ trait Geofence
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_geofenceUri)
-            ->setBody($geofence->toJson())
+            ->setUri($this->_placeUri)
+            ->setBody($place->toJson())
             ->setContentType('application/json');
 
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            $geofence->reset($response->getBody());
-            return $geofence;
+            $place->reset($response->getBody());
+            return $place;
         }
 
         $errorMessage = $response->getErrorMessage();
@@ -91,15 +102,19 @@ trait Geofence
     }
 
     /**
-     * Updates the given geofence with new model
-     * @param GeofenceModel $geofence
-     * @return GeofenceModel
+     * Updates the given place with new model
+     * @param PlaceModel $place
+     * @return PlaceModel
      * @throws AutomileException
      */
-    public function editGeofence(GeofenceModel $geofence)
+    public function editPlace(PlaceModel $place)
     {
-        if (!$geofence->getGeofenceId()) {
-            throw new AutomileException('Geofence ID is empty');
+        if (!$place->getPlaceId()) {
+            throw new AutomileException('Place ID is empty');
+        }
+
+        if (!$place->isValid()) {
+            throw new AutomileException("Model is invalid");
         }
 
         $request = Config::getNewRequest();
@@ -109,14 +124,14 @@ trait Geofence
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_PUT)
-            ->setUri($this->_geofenceUri . '/' . (int)$geofence->getGeofenceId())
-            ->setBody($geofence->toJson())
+            ->setUri($this->_placeUri . '/' . (int)$place->getPlaceId())
+            ->setBody($place->toJson())
             ->setContentType('application/json');
 
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return $geofence;
+            return $place;
         }
 
         $errorMessage = $response->getErrorMessage();
@@ -124,11 +139,12 @@ trait Geofence
     }
 
     /**
-     * Removes the given geofence
-     * @param int $geofenceId
+     * Removes the given company
+     * @param $placeId
      * @return bool
+     * @throws AutomileException
      */
-    public function deleteGeofence($geofenceId)
+    public function deletePlace($placeId)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
@@ -137,7 +153,7 @@ trait Geofence
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_DELETE)
-            ->setUri($this->_geofenceUri . '/' . (int)$geofenceId);
+            ->setUri($this->_placeUri . '/' . (int)$placeId);
 
         $isSuccessful = $client->send($request, $response);
 
