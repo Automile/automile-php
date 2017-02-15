@@ -99,6 +99,7 @@ trait Notification
     }
 
     /**
+     * Deletes the notification
      * @param $notificationId
      * @return bool
      * @throws AutomileException
@@ -125,6 +126,7 @@ trait Notification
     }
 
     /**
+     * Edit notification
      * @param Trigger $notification
      * @return Trigger
      * @throws AutomileException
@@ -156,6 +158,13 @@ trait Notification
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
+    /**
+     * Mutes a notification
+     * @param int $notificationId
+     * @param int $secondsFromNow
+     * @return bool
+     * @throws AutomileException
+     */
     public function muteNotification($notificationId, $secondsFromNow)
     {
         $request = Config::getNewRequest();
@@ -181,6 +190,12 @@ trait Notification
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
+    /**
+     * Unmutes a notification
+     * @param int $notificationId
+     * @return bool
+     * @throws AutomileException
+     */
     public function unmuteNotification($notificationId)
     {
         $request = Config::getNewRequest();
