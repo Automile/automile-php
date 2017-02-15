@@ -141,7 +141,12 @@ trait Geofence
 
         $isSuccessful = $client->send($request, $response);
 
-        return $isSuccessful;
+        if ($isSuccessful) {
+            return true;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
 }

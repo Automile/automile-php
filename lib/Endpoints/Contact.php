@@ -4,14 +4,14 @@ namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\Contact;
+use Automile\Sdk\Models\Contact as ContactModel;
 use Automile\Sdk\Models\ContactRowset;
 
 /**
  * Contacts API methods
  * @package Automile\Sdk\Endpoints
  */
-trait Contacts
+trait Contact
 {
 
     private $_contactsUri = '/v1/resourceowner/contacts2';
@@ -44,7 +44,7 @@ trait Contacts
     /**
      * Get a contact by id
      * @param int $contactId
-     * @return ContactRowset
+     * @return ContactModel
      * @throws AutomileException
      */
     public function getContactById($contactId)
@@ -61,7 +61,7 @@ trait Contacts
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new Contact($response->getBody());
+            return new ContactModel($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());
@@ -69,7 +69,7 @@ trait Contacts
 
     /**
      * Get the contact representing myself
-     * @return ContactRowset
+     * @return ContactModel
      * @throws AutomileException
      */
     public function getMe()
@@ -86,7 +86,7 @@ trait Contacts
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new Contact($response->getBody());
+            return new ContactModel($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());

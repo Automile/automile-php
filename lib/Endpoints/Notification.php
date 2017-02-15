@@ -2,29 +2,27 @@
 
 namespace Automile\Sdk\Endpoints;
 
-
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\Vehicle2;
-use Automile\Sdk\Models\Vehicle2Rowset;
-use Automile\Sdk\Models\Vehicle2StatusRowset;
-use Automile\Sdk\Models\VehicleCheckIn;
+use Automile\Sdk\Models\Trigger;
+use Automile\Sdk\Models\TriggerMute;
+use Automile\Sdk\Models\TriggerRowset;
 
 /**
- * Vehicle API methods
+ * Notification (Trigger) API Queries
  * @package Automile\Sdk\Endpoints
  */
-trait Vehicle
+trait Notification
 {
 
-    private $_vehicleUri = 'v1/resourceowner/vehicles2';
+    private $_notificationUri = '/v1/resourceowner/triggers';
 
     /**
-     * Get all vehicles that the user has access to
-     * @return Vehicle2Rowset
+     * Get all triggers
+     * @return TriggerRowset
      * @throws AutomileException
      */
-    public function getVehicles()
+    public function getNotifications()
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
@@ -33,24 +31,24 @@ trait Vehicle
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_vehicleUri);
+            ->setUri($this->_notificationUri);
 
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new Vehicle2Rowset($response->getBody());
+            return new TriggerRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());
     }
 
     /**
-     * Get the details about the vehicle
-     * @param int $id
-     * @return Vehicle2
+     * Get a trigger by id
+     * @param int $notificationId
+     * @return Trigger
      * @throws AutomileException
      */
-    public function getVehicleById($id)
+    public function getNotificationById($notificationId)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
@@ -59,49 +57,24 @@ trait Vehicle
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_vehicleUri . '/' . (int)$id);
+            ->setUri($this->_notificationUri . '/' . (int)$notificationId);
 
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new Vehicle2($response->getBody());
+            return new Trigger($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());
     }
 
     /**
-     * Get position and status of all vehicles that the user has access to
-     * @return Vehicle2StatusRowset
+     * Creates a new trigger
+     * @param Trigger $notification
+     * @return Trigger
      * @throws AutomileException
      */
-    public function getStatusForVehicles()
-    {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_vehicleUri . '/status');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new Vehicle2StatusRowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
-    }
-
-    /**
-     * Check-in to a vehicle
-     * @param VehicleCheckIn $checkIn
-     * @return bool
-     * @throws AutomileException
-     */
-    public function checkInToVehicle(VehicleCheckIn $checkIn)
+    public function createNotification(Trigger $notification)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
@@ -110,14 +83,15 @@ trait Vehicle
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_vehicleUri . '/checkin')
-            ->setBody($checkIn->toJson())
+            ->setUri($this->_notificationUri)
+            ->setBody($notification->toJson())
             ->setContentType('application/json');
 
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return true;
+            $notification->reset($response->getBody());
+            return $notification;
         }
 
         $errorMessage = $response->getErrorMessage();
@@ -125,67 +99,11 @@ trait Vehicle
     }
 
     /**
-     * Check-out from a vehicle
+     * @param $notificationId
      * @return bool
      * @throws AutomileException
      */
-    public function checkOut()
-    {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_vehicleUri . '/checkout');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return true;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
-    }
-
-    /**
-     * Creates a new vehicle
-     * @param Vehicle2 $vehicle
-     * @return Vehicle2
-     * @throws AutomileException
-     */
-    public function createVehicle(Vehicle2 $vehicle)
-    {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_vehicleUri)
-            ->setBody($vehicle->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            $vehicle->reset($response->getBody());
-            return $vehicle;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
-    }
-
-    /**
-     * Removes the given vehicle
-     * @param int $id
-     * @return bool
-     */
-    public function deleteVehicle($id)
+    public function deleteNotification($notificationId)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
@@ -194,7 +112,7 @@ trait Vehicle
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_DELETE)
-            ->setUri($this->_vehicleUri . '/' . (int)$id);
+            ->setUri($this->_notificationUri . '/' . (int)$notificationId);
 
         $isSuccessful = $client->send($request, $response);
 
@@ -207,15 +125,14 @@ trait Vehicle
     }
 
     /**
-     * Updates the given vehicle with new model
-     * @param Vehicle2 $vehicle
-     * @return Vehicle2
+     * @param Trigger $notification
+     * @return Trigger
      * @throws AutomileException
      */
-    public function editVehicle(Vehicle2 $vehicle)
+    public function editNotification(Trigger $notification)
     {
-        if (!$vehicle->getVehicleId()) {
-            throw new AutomileException('Vehicle ID is empty');
+        if (!$notification->getTriggerId()) {
+            throw new AutomileException('Notification ID is empty');
         }
 
         $request = Config::getNewRequest();
@@ -225,14 +142,61 @@ trait Vehicle
         $this->_authorizeRequest($request);
 
         $request->setMethod(Config::METHOD_PUT)
-            ->setUri($this->_vehicleUri . '/' . (int)$vehicle->getVehicleId())
-            ->setBody($vehicle->toJson())
+            ->setUri($this->_notificationUri . '/' . (int)$notification->getTriggerId())
+            ->setBody($notification->toJson())
             ->setContentType('application/json');
 
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return $vehicle;
+            return $notification;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    public function muteNotification($notificationId, $secondsFromNow)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $mute = new TriggerMute(['SecondsFromNow' => $secondsFromNow]);
+
+        $request->setMethod(Config::METHOD_PUT)
+            ->setUri($this->_notificationUri . '/mute/' . (int)$notificationId)
+            ->setBody($mute->toJson())
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return true;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    public function unmuteNotification($notificationId)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_PUT)
+            ->setUri($this->_notificationUri . '/unmute/' . (int)$notificationId)
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return true;
         }
 
         $errorMessage = $response->getErrorMessage();
