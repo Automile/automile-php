@@ -176,7 +176,7 @@ trait Vehicle
             return $vehicle;
         }
 
-        $errorMessage = $response->getErrorMessage();
+        $errorMessage = $response->getErrorMessage() ?: $response->getBody(true);
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
@@ -202,7 +202,7 @@ trait Vehicle
     }
 
     /**
-     * Returns the external information we have on the vehicle
+     * Updates the given vehicle with new model
      * @param Vehicle2 $vehicle
      * @return Vehicle2
      * @throws AutomileException

@@ -107,6 +107,22 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
     }
 
     /**
+     * convert the rowset and all its models to a multi-dimensional array
+     * @return array
+     */
+    public function toArray()
+    {
+        $values = [];
+        if (count($this->_models)) {
+            foreach ($this as $model) {
+                $values[] = $model->toArray();
+            }
+        }
+
+        return $values;
+    }
+
+    /**
      * Create new model to be added into the rowset
      * @param array|object $properties
      * @return ModelAbstract

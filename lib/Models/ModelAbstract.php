@@ -96,7 +96,24 @@ abstract class ModelAbstract
      */
     public function toJson()
     {
-        return json_encode($this->_properties);
+        return json_encode($this->toArray());
+    }
+
+    /**
+     * convert the model to an array
+     * @return array
+     */
+    public function toArray()
+    {
+        $values = [];
+        foreach ($this->_properties as $key => $value) {
+            if ($value instanceof ModelAbstract || $value instanceof ModelRowsetAbstract) {
+                $value = $value->toArray();
+            }
+
+            $values[$key] = $value;
+        }
+        return $values;
     }
 
 }
