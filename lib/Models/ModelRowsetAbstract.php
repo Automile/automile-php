@@ -26,11 +26,7 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
      */
     public function __construct($rows = [])
     {
-        if ($rows) {
-            foreach ($rows as $row) {
-                $this->push($row);
-            }
-        }
+        $this->pushMany($rows);
     }
 
     function rewind()
@@ -120,6 +116,21 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
         }
 
         return $values;
+    }
+
+    /**
+     * @param array|object $rows contains arrays or objects to initialize models for
+     * @return ModelRowsetAbstract
+     */
+    public function pushMany($rows)
+    {
+        if ($rows) {
+            foreach ($rows as $row) {
+                $this->push($row);
+            }
+        }
+
+        return $this;
     }
 
     /**

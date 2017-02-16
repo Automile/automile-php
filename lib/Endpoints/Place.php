@@ -19,26 +19,10 @@ trait Place
     /**
      * Get places
      * @return PlaceRowset
-     * @throws AutomileException
      */
     public function getPlaces()
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_placeUri);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new PlaceRowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getAll($this->_placeUri, new PlaceRowset());
     }
 
     /**

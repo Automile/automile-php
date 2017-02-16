@@ -19,26 +19,10 @@ trait Contact
     /**
      * Get a list of all contacts that user is associated with
      * @return ContactRowset
-     * @throws AutomileException
      */
     public function getContacts()
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_contactsUri);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new ContactRowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getAll($this->_contactsUri, new ContactRowset());
     }
 
     /**

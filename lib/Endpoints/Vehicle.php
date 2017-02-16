@@ -22,26 +22,10 @@ trait Vehicle
     /**
      * Get all vehicles that the user has access to
      * @return Vehicle2Rowset
-     * @throws AutomileException
      */
     public function getVehicles()
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_vehicleUri);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new Vehicle2Rowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getAll($this->_vehicleUri, new Vehicle2Rowset());
     }
 
     /**

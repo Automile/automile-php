@@ -20,26 +20,10 @@ trait Notification
     /**
      * Get all triggers
      * @return TriggerRowset
-     * @throws AutomileException
      */
     public function getNotifications()
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_notificationUri);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new TriggerRowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getAll($this->_notificationUri, new TriggerRowset());
     }
 
     /**

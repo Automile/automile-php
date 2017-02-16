@@ -3,6 +3,7 @@
 namespace Automile\Sdk;
 
 use Automile\Sdk\HttpClient\Request\RequestInterface;
+use Automile\Sdk\Models\ModelRowsetAbstract;
 use Automile\Sdk\Models\User;
 use Automile\Sdk\OAuth\Http as OAuthHttp;
 use Automile\Sdk\OAuth\Token;
@@ -163,6 +164,32 @@ class AutomileClient
         $request->setBearerAuth($this->_token->getAccessToken());
 
         return $request;
+    }
+
+    /**
+     * @param string $uri
+     * @param ModelRowsetAbstract $rowset
+     * @return ModelRowsetAbstract
+     * @throws AutomileException
+     */
+    protected function _getAll($uri, ModelRowsetAbstract $rowset)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($uri);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return $rowset->pushMany($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
     }
 
 }
