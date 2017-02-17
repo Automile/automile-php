@@ -3,6 +3,7 @@
 namespace Automile\Sdk;
 
 use Automile\Sdk\HttpClient\Request\RequestInterface;
+use Automile\Sdk\Models\ModelAbstract;
 use Automile\Sdk\Models\ModelRowsetAbstract;
 use Automile\Sdk\Models\User;
 use Automile\Sdk\OAuth\Http as OAuthHttp;
@@ -18,6 +19,7 @@ use Automile\Sdk\Endpoints\Geofence;
 use Automile\Sdk\Endpoints\Notification;
 use Automile\Sdk\Endpoints\NotificationMessage;
 use Automile\Sdk\Endpoints\Place;
+use Automile\Sdk\Endpoints\Device;
 
 /**
  * Automile PHP SDK Facade object
@@ -27,7 +29,7 @@ use Automile\Sdk\Endpoints\Place;
 class AutomileClient
 {
 
-    use SignUp, Vehicle, Trip, Contact, Geofence, Notification, NotificationMessage, Place;
+    use SignUp, Vehicle, Trip, Contact, Geofence, Notification, NotificationMessage, Place, Device;
 
     /**
      * @var User
@@ -190,6 +192,119 @@ class AutomileClient
         }
 
         throw new AutomileException($response->getErrorMessage());
+    }
+
+    /**
+     * @param string $uri
+     * @param ModelAbstract $model
+     * @param int $id
+     * @return ModelAbstract
+     * @throws AutomileException
+     */
+    protected function _getById($uri, ModelAbstract $model, $id)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($uri . '/' . (int)$id);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return $model->reset($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
+    }
+
+    /**
+     * @param string $uri
+     * @param ModelAbstract $model
+     * @return ModelAbstract
+     * @throws AutomileException
+     */
+    protected function _create($uri, ModelAbstract $model)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_POST)
+            ->setUri($uri)
+            ->setBody($model->toJson())
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return $model->reset($response->getBody());
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * @param string $uri
+     * @param int $id
+     * @param ModelAbstract $vehicle
+     * @return ModelAbstract
+     * @throws AutomileException
+     */
+    protected function _edit($uri, $id, ModelAbstract $model)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_PUT)
+            ->setUri($uri . '/' . (int)$id)
+            ->setBody($model->toJson())
+            ->setContentType('application/json');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return $model;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * Removes the given vehicle
+     * @param int $id
+     * @return bool
+     * @throws AutomileException
+     */
+    protected function _delete($uri, $id)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_DELETE)
+            ->setUri($uri . '/' . (int)$id);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return true;
+        }
+
+        $errorMessage = $response->getErrorMessage();
+        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
     }
 
 }
