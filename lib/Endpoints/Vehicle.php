@@ -32,26 +32,10 @@ trait Vehicle
      * Get the details about the vehicle
      * @param int $id
      * @return Vehicle2
-     * @throws AutomileException
      */
     public function getVehicleById($id)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_vehicleUri . '/' . (int)$id);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new Vehicle2($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getById($this->_vehicleUri, $id, new Vehicle2());
     }
 
     /**
@@ -138,64 +122,26 @@ trait Vehicle
      * Creates a new vehicle
      * @param Vehicle2 $vehicle
      * @return Vehicle2
-     * @throws AutomileException
      */
     public function createVehicle(Vehicle2 $vehicle)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_vehicleUri)
-            ->setBody($vehicle->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            $vehicle->reset($response->getBody());
-            return $vehicle;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_create($this->_vehicleUri, $vehicle);
     }
 
     /**
      * Removes the given vehicle
      * @param int $id
      * @return bool
-     * @throws AutomileException
      */
     public function deleteVehicle($id)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_DELETE)
-            ->setUri($this->_vehicleUri . '/' . (int)$id);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return true;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_delete($this->_vehicleUri, $id);
     }
 
     /**
      * Updates the given vehicle with new model
      * @param Vehicle2 $vehicle
      * @return Vehicle2
-     * @throws AutomileException
      */
     public function editVehicle(Vehicle2 $vehicle)
     {
@@ -203,25 +149,7 @@ trait Vehicle
             throw new AutomileException('Vehicle ID is empty');
         }
 
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_PUT)
-            ->setUri($this->_vehicleUri . '/' . (int)$vehicle->getVehicleId())
-            ->setBody($vehicle->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return $vehicle;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_edit($this->_vehicleUri, $vehicle->getVehicleId(), $vehicle);
     }
 
 }

@@ -201,7 +201,7 @@ class AutomileClient
      * @return ModelAbstract
      * @throws AutomileException
      */
-    protected function _getById($uri, ModelAbstract $model, $id)
+    protected function _getById($uri, $id, ModelAbstract $model)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();

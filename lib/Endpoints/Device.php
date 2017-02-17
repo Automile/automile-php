@@ -2,6 +2,7 @@
 
 namespace Automile\Sdk\Endpoints;
 
+use Automile\Sdk\AutomileException;
 use Automile\Sdk\Models\DeviceRowset;
 use Automile\Sdk\Models\Device as DeviceModel;
 
@@ -30,7 +31,7 @@ trait Device
      */
     public function getDeviceById($id)
     {
-        return $this->_getById($this->_deviceUri, new DeviceModel(), $id);
+        return $this->_getById($this->_deviceUri, $id, new DeviceModel());
     }
 
     /**
@@ -47,6 +48,7 @@ trait Device
      * Updates the given IMEIConfig id
      * @param DeviceModel $device
      * @return DeviceModel
+     * @throws AutomileException
      */
     public function editDevice(DeviceModel $device)
     {

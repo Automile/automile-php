@@ -29,26 +29,10 @@ trait Contact
      * Get a contact by id
      * @param int $contactId
      * @return ContactModel
-     * @throws AutomileException
      */
     public function getContactById($contactId)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_contactsUri . '/' . (int)$contactId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new ContactModel($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getById($this->_contactsUri, $contactId, new ContactModel());
     }
 
     /**

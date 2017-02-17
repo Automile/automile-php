@@ -25,54 +25,24 @@ trait Geofence
         return $this->_getAll($this->_geofenceUri, new GeofenceRowset());
     }
 
+    /**
+     * Get geofence
+     * @param int $geofenceId
+     * @return GeofenceModel
+     */
     public function getGeofenceById($geofenceId)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_geofenceUri . '/' . (int)$geofenceId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new GeofenceModel($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getById($this->_geofenceUri, $geofenceId, new GeofenceModel());
     }
 
     /**
-     * Get a list of geofencese user is associated with
+     * Creates a new geofence
      * @param GeofenceModel $geofence
      * @return GeofenceModel
-     * @throws AutomileException
      */
     public function createGeofence(GeofenceModel $geofence)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_geofenceUri)
-            ->setBody($geofence->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            $geofence->reset($response->getBody());
-            return $geofence;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_create($this->_geofenceUri, $geofence);
     }
 
     /**
@@ -87,25 +57,7 @@ trait Geofence
             throw new AutomileException('Geofence ID is empty');
         }
 
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_PUT)
-            ->setUri($this->_geofenceUri . '/' . (int)$geofence->getGeofenceId())
-            ->setBody($geofence->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return $geofence;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_edit($this->_geofenceUri, $geofence->getGeofenceId(), $geofence);
     }
 
     /**
@@ -115,23 +67,7 @@ trait Geofence
      */
     public function deleteGeofence($geofenceId)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_DELETE)
-            ->setUri($this->_geofenceUri . '/' . (int)$geofenceId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return true;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_delete($this->_geofenceUri, $geofenceId);
     }
 
 }

@@ -34,79 +34,27 @@ trait Notification
      */
     public function getNotificationById($notificationId)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_notificationUri . '/' . (int)$notificationId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new Trigger($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getById($this->_notificationUri, $notificationId, new Trigger());
     }
 
     /**
      * Creates a new trigger
      * @param Trigger $notification
      * @return Trigger
-     * @throws AutomileException
      */
     public function createNotification(Trigger $notification)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_POST)
-            ->setUri($this->_notificationUri)
-            ->setBody($notification->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            $notification->reset($response->getBody());
-            return $notification;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_create($this->_notificationUri, $notification);
     }
 
     /**
      * Deletes the notification
      * @param $notificationId
      * @return bool
-     * @throws AutomileException
      */
     public function deleteNotification($notificationId)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_DELETE)
-            ->setUri($this->_notificationUri . '/' . (int)$notificationId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return true;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_delete($this->_notificationUri, $notificationId);
     }
 
     /**
@@ -121,25 +69,7 @@ trait Notification
             throw new AutomileException('Notification ID is empty');
         }
 
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_PUT)
-            ->setUri($this->_notificationUri . '/' . (int)$notification->getTriggerId())
-            ->setBody($notification->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return $notification;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_edit($this->_notificationUri, $notification->getTriggerId(), $notification);
     }
 
     /**

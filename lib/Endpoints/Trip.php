@@ -63,26 +63,10 @@ trait Trip
      * Get the details about the trip
      * @param int $tripId
      * @return TripModel
-     * @throws AutomileException
      */
     public function getTripById($tripId)
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_tripUri . '/' . (int)$tripId);
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new TripModel($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getById($this->_tripUri, $tripId, new TripModel());
     }
 
     /**
@@ -302,7 +286,6 @@ trait Trip
      * Updates the given trip with a trip type (category) and trip tags
      * @param TripModel $trip
      * @return TripModel
-     * @throws AutomileException
      */
     public function editTrip(TripModel $trip)
     {
@@ -310,25 +293,7 @@ trait Trip
             throw new AutomileException('Trip ID is empty');
         }
 
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_PUT)
-            ->setUri($this->_tripUri . '/' . (int)$trip->getTripId())
-            ->setBody($trip->toJson())
-            ->setContentType('application/json');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return $trip;
-        }
-
-        $errorMessage = $response->getErrorMessage();
-        throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+        return $this->_edit($this->_tripUri, $trip->getTripId(), $trip);
     }
 
     /**

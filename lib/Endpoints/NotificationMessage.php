@@ -24,6 +24,12 @@ trait NotificationMessage
         return $this->_getAll($this->_notificationMessagesUri, new TriggerMessageHistoryRowset());
     }
 
+    /**
+     * Get trigger messages by trigger id
+     * @param $notificationId
+     * @return TriggerMessageHistoryRowset
+     * @throws AutomileException
+     */
     public function getNotificationMessagesByNotificationId($notificationId)
     {
         $request = Config::getNewRequest();
