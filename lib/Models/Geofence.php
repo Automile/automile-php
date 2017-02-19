@@ -25,4 +25,15 @@ class Geofence extends ModelAbstract
         "Schedules"
     ];
 
+    /**
+     * @param array|object $rows
+     * @return $this
+     */
+    public function setGeofencePolygon($rows)
+    {
+        $rows = (array)$rows;
+        $this->_properties['GeofencePolygon'] = new GeofencePolygon(empty($rows['Coordinates']) ? [] : $rows['Coordinates']);
+        return $this;
+    }
+
 }
