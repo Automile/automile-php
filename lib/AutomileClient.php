@@ -26,6 +26,7 @@ use Automile\Sdk\Endpoints\VehicleGeofence;
 use Automile\Sdk\Endpoints\VehiclePlace;
 use Automile\Sdk\Endpoints\DeviceEvent;
 use Automile\Sdk\Endpoints\PublishSubscribe;
+use Automile\Sdk\Endpoints\ExpenseReport;
 
 /**
  * Automile PHP SDK Facade object
@@ -36,7 +37,7 @@ class AutomileClient
 {
 
     use SignUp, Vehicle, Trip, Contact, Geofence, Notification, NotificationMessage, Place, Device,
-        Fleet, FleetContact, VehicleGeofence, VehiclePlace, DeviceEvent, PublishSubscribe;
+        Fleet, FleetContact, VehicleGeofence, VehiclePlace, DeviceEvent, PublishSubscribe, ExpenseReport;
 
     /**
      * @var User
