@@ -11,7 +11,7 @@ use Automile\Sdk\Models\DeviceEventStatus;
 trait DeviceEvent
 {
 
-    protected $_deviceEventUri = '/v1/resourceowner/imeievents';
+    private $_deviceEventUri = '/v1/resourceowner/imeievents';
 
     /**
      * Get a list of all IMEIEvents that user is associated with

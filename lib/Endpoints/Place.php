@@ -14,7 +14,7 @@ use Automile\Sdk\Models\Place as PlaceModel;
 trait Place
 {
 
-    protected $_placeUri = '/v1/resourceowner/place';
+    private $_placeUri = '/v1/resourceowner/place';
 
     /**
      * Get places

@@ -14,7 +14,7 @@ use Automile\Sdk\Models\VehiclePlaceRowset;
 trait VehiclePlace
 {
 
-    protected $_vehiclePlaceUri = '/v1/resourceowner/vehicleplace';
+    private $_vehiclePlaceUri = '/v1/resourceowner/vehicleplace';
 
     /**
      * Get details about a specific relationship between a place and a vehicle

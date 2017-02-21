@@ -13,7 +13,7 @@ use Automile\Sdk\Models\Device as DeviceModel;
 trait Device
 {
 
-    protected $_deviceUri = '/v1/resourceowner/imeiconfigs';
+    private $_deviceUri = '/v1/resourceowner/imeiconfigs';
 
     /**
      * Get all imeis (devices) that the logged in user has access to

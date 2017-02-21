@@ -13,7 +13,7 @@ use Automile\Sdk\Models\TriggerMessageHistoryRowset;
 trait NotificationMessage
 {
 
-    protected $_notificationMessagesUri = '/v1/resourceowner/triggermessageshistory';
+    private $_notificationMessagesUri = '/v1/resourceowner/triggermessageshistory';
 
     /**
      * Get all trigger messages that the logged in user has access to

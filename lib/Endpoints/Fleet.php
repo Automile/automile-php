@@ -13,7 +13,7 @@ use Automile\Sdk\Models\CompanyRowset;
 trait Fleet
 {
 
-    protected $_fleetUri = '/v1/resourceowner/companies';
+    private $_fleetUri = '/v1/resourceowner/companies';
 
     /**
      * Get a list of all companies that user is associated with

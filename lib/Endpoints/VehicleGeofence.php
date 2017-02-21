@@ -14,7 +14,7 @@ use Automile\Sdk\Models\VehicleGeofenceRowset;
 trait VehicleGeofence
 {
 
-    protected $_vehicleGeofenceUri = '/v1/resourceowner/vehiclegeofence';
+    private $_vehicleGeofenceUri = '/v1/resourceowner/vehiclegeofence';
 
     /**
      * Get details about a specific relationship between the geofence and the vehicle
