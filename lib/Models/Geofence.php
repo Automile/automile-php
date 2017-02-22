@@ -27,12 +27,18 @@ class Geofence extends ModelAbstract
 
     /**
      * @param array|object $rows
-     * @return $this
+     * @return GeofencePolygon
      */
     public function setGeofencePolygon($rows)
     {
-        $rows = (array)$rows;
-        $this->_properties['GeofencePolygon'] = new GeofencePolygon(empty($rows['Coordinates']) ? [] : $rows['Coordinates']);
+        if (!is_object($rows) || !$rows instanceof GeofencePolygon) {
+            $rows = new GeofencePolygon($rows);
+        } else {
+            $rows = (array)$rows;
+            $rows = new GeofencePolygon(empty($rows['Coordinates']) ? [] : $rows['Coordinates']);
+        }
+
+        $this->_properties['GeofencePolygon'] = $rows;
         return $this;
     }
 

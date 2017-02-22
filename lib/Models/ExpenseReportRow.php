@@ -55,7 +55,11 @@ class ExpenseReportRow extends ModelAbstract
      */
     public function setExpenseReportRowContent($rows)
     {
-        $this->_properties['ExpenseReportRowContent'] = new ExpenseReportRowContentRowset($rows);
+        if (!is_object($rows) || !$rows instanceof ExpenseReportRowContentRowset) {
+            $rows = new ExpenseReportRowContentRowset($rows);
+        }
+
+        $this->_properties['ExpenseReportRowContent'] = $rows;
         return $this;
     }
 

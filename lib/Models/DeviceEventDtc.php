@@ -58,7 +58,11 @@ class DeviceEventDtc extends ModelAbstract
      */
     public function setDtcs($dtcs)
     {
-        $this->_properties['Dtcs'] = new DeviceDtcRowset($dtcs);
+        if (!is_object($dtcs) || !$dtcs instanceof DeviceDtcRowset) {
+            $dtcs = new DeviceDtcRowset($dtcs);
+        }
+
+        $this->_properties['Dtcs'] = $dtcs;
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Automile\Sdk\Models;
 
+use Automile\Sdk\Types\TripTypeTriggerType;
+
 /**
  * Place Model
  * @package Automile\Sdk\Models
@@ -15,10 +17,6 @@ namespace Automile\Sdk\Models;
  */
 class Place extends ModelAbstract
 {
-
-    const TRIP_TYPE_TRIGGER_START = 0;
-    const TRIP_TYPE_TRIGGER_END = 1;
-    const TRIP_TYPE_TRIGGER_DRIVES_BETWEEN = 2;
 
     protected $_allowedProperties = [
         "PlaceId",
@@ -39,7 +37,11 @@ class Place extends ModelAbstract
      */
     public function setPositionPoint($property)
     {
-        $this->_properties['PositionPoint'] = new GeographicPosition($property);
+        if (!is_object($property) || !$property instanceof GeographicPosition) {
+            $property = new GeographicPosition($property);
+        }
+
+        $this->_properties['PositionPoint'] = $property;
         return $this;
     }
 
@@ -49,11 +51,11 @@ class Place extends ModelAbstract
      */
     public function isValid()
     {
-        if ($this->getTripTypeTrigger() == self::TRIP_TYPE_TRIGGER_DRIVES_BETWEEN && !$this->getDrivesBetweenAnotherPlaceId()) {
+        if ($this->getTripTypeTrigger() == TripTypeTriggerType::DRIVES_BETWEEN && !$this->getDrivesBetweenAnotherPlaceId()) {
             throw new ModelValidatorException('You need to enter the second place when you select the drives between type, use the DrivesBetweenAnotherPlaceId property');
         }
 
-        if ($this->getTripTypeTrigger() != self::TRIP_TYPE_TRIGGER_DRIVES_BETWEEN && $this->getDrivesBetweenAnotherPlaceId()) {
+        if ($this->getTripTypeTrigger() != TripTypeTriggerType::DRIVES_BETWEEN && $this->getDrivesBetweenAnotherPlaceId()) {
             throw new ModelValidatorException("You can't use DrivesBetweenAnotherPlaceId property if the TripTypeTrigger is null or isnt't equal to DrivesBetween type");
         }
 
