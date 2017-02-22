@@ -51,7 +51,7 @@ class ExpenseReportRow extends ModelAbstract
 
     /**
      * @param array|object $rows
-     * @return ExpenseReportRowContentRowset
+     * @return ExpenseReportRow
      */
     public function setExpenseReportRowContent($rows)
     {

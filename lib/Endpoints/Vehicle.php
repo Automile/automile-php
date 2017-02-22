@@ -41,26 +41,10 @@ trait Vehicle
     /**
      * Get position and status of all vehicles that the user has access to
      * @return Vehicle2StatusRowset
-     * @throws AutomileException
      */
     public function getStatusForVehicles()
     {
-        $request = Config::getNewRequest();
-        $response = Config::getNewResponse();
-        $client = Config::getNewHttpClient();
-
-        $this->_authorizeRequest($request);
-
-        $request->setMethod(Config::METHOD_GET)
-            ->setUri($this->_vehicleUri . '/status');
-
-        $isSuccessful = $client->send($request, $response);
-
-        if ($isSuccessful) {
-            return new Vehicle2StatusRowset($response->getBody());
-        }
-
-        throw new AutomileException($response->getErrorMessage());
+        return $this->_getAll($this->_vehicleUri . '/status', new Vehicle2StatusRowset());
     }
 
     /**

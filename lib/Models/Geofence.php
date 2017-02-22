@@ -27,7 +27,7 @@ class Geofence extends ModelAbstract
 
     /**
      * @param array|object $rows
-     * @return GeofencePolygon
+     * @return Geofence
      */
     public function setGeofencePolygon($rows)
     {

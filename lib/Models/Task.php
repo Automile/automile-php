@@ -32,7 +32,7 @@ class Task extends ModelAbstract
 
     /**
      * @param array|object $rows
-     * @return TaskMessageRowset
+     * @return Task
      */
     public function setTaskMessages($rows)
     {
@@ -46,7 +46,7 @@ class Task extends ModelAbstract
 
     /**
      * @param array|object $position
-     * @return GeographicPosition
+     * @return Task
      */
     public function setPosition($position)
     {

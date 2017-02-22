@@ -45,6 +45,7 @@ abstract class ModelAbstract
      */
     protected function _setProperties($properties)
     {
+        $properties = (array)$properties;
         foreach ($properties as $key => $value) {
             if (!in_array($key, $this->_allowedProperties)) {
                 continue;

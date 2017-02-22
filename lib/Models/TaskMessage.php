@@ -23,7 +23,7 @@ class TaskMessage extends ModelAbstract
 
     /**
      * @param array|object $position
-     * @return GeographicPosition
+     * @return TaskMessage
      */
     public function setPosition($position)
     {
