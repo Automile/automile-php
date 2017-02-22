@@ -32,7 +32,7 @@ trait VehiclePlace
      * @return VehiclePlaceRowset
      * @throws AutomileException
      */
-    public function getVehiclePlaceByPlaceId($placeId)
+    public function getVehiclePlacesByPlaceId($placeId)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();
