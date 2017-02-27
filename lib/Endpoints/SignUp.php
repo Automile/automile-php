@@ -31,6 +31,7 @@ trait SignUp
 
         $request->setUri(self::$_signUpUri)
             ->setMethod(Config::METHOD_POST)
+            ->setContentType('application/x-www-form-urlencoded')
             ->setPostParam('email', $email);
 
         $isSuccessful = $client->send($request, $response);
