@@ -6,7 +6,6 @@ use Automile\Sdk\Types\PublishSubscribeAuthenticationType;
 
 /**
  * Class Bearer
- * @package Automile\Sdk\Models
  */
 class Bearer extends AuthenticationAbstract
 {

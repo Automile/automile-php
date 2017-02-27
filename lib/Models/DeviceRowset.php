@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Device Rowset Model
- * @package Automile\Sdk\Models
  */
 class DeviceRowset extends ModelRowsetAbstract
 {

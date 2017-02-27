@@ -6,7 +6,7 @@ use Automile\Sdk\Types\TripTypeTriggerType;
 
 /**
  * Place Model
- * @package Automile\Sdk\Models
+ * 
  * @method GeographicPosition getPositionPoint()
  * @method int getPlaceId()
  * @method string getName()

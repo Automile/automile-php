@@ -4,11 +4,12 @@ namespace Automile\Sdk\Models;
 
 /**
  * Class User
- * @package Automile\Sdk\Models
+ *
  * @method string getUsername()
  * @method string getPassword()
  * @method string getAPIClientIdentifier()
  * @method string getAPIClientSecret()
+ *
  * @method User setUsername(string $username)
  * @method User setPassword(string $password)
  * @method User setAPIClientIdentifier(string $apiClient)
@@ -25,7 +26,15 @@ class User extends ModelAbstract
         'Username', 'Password', 'APIClientIdentifier', 'APIClientSecret'
     ];
 
-    public function __toString()
+    /**
+     * Output PHP code to be used by the Automile SDK
+     * @return string
+     * @see \Automile\Sdk\Config::setUsername()
+     * @see \Automile\Sdk\Config::setPassword()
+     * @see \Automile\Sdk\Config::setApiClient()
+     * @see \Automile\Sdk\Config::setApiSecret()
+     */
+    public function toPHP()
     {
         return <<<TXT
 \Automile\Sdk\Config::setUsername('{$this->getUsername()}');

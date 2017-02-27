@@ -4,7 +4,6 @@ namespace Automile\Sdk\HttpClient\Response;
 
 /**
  * Interface ResponseInterface
- * @package Automile\Sdk\HttpClient
  */
 interface ResponseInterface
 {

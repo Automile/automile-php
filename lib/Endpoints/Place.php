@@ -3,13 +3,11 @@
 namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
-use Automile\Sdk\Config;
 use Automile\Sdk\Models\PlaceRowset;
 use Automile\Sdk\Models\Place as PlaceModel;
 
 /**
  * Place API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait Place
 {
@@ -39,6 +37,7 @@ trait Place
      * Creates a new place
      * @param PlaceModel $place
      * @return PlaceModel
+     * @throws AutomileException
      */
     public function createPlace(PlaceModel $place)
     {
@@ -53,6 +52,7 @@ trait Place
      * Updates the given place with new model
      * @param PlaceModel $place
      * @return PlaceModel
+     * @throws AutomileException
      */
     public function editPlace(PlaceModel $place)
     {

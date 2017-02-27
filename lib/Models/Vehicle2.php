@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sergey
- * Date: 2017-02-09
- * Time: 11:16
- */
 
 namespace Automile\Sdk\Models;
 
 /**
  * Vehicle2 Model
- * @package Automile\Sdk\Models
+ * 
  * @method int getVehicleId()
  * @method string getVehicleIdentificationNumber()
  * @method string getNumberPlate()

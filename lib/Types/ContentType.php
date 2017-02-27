@@ -4,7 +4,6 @@ namespace Automile\Sdk\Types;
 
 /**
  * ContentType Enum
- * @package Automile\Sdk\Types
  */
 class ContentType
 {

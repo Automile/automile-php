@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * TaskMessage Rowset Model
- * @package Automile\Sdk\Models
  */
 class TaskMessageRowset extends ModelRowsetAbstract
 {

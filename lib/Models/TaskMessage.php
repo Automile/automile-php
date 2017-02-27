@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * TaskMessage Model
- * @package Automile\Sdk\Models
  */
 class TaskMessage extends ModelAbstract
 {

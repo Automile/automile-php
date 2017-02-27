@@ -2,7 +2,9 @@
 
 namespace Automile\Sdk\Storage;
 
-
+/**
+ * Filesystem storage implementation
+ */
 class Filesystem implements StorageInterface
 {
 
@@ -36,8 +38,10 @@ class Filesystem implements StorageInterface
     }
 
     /**
-     * @param string $storableClass class name of a storable implementation
+     * @param string $storable
      * @return StorableInterface|null
+     * @throws StorageException
+     * @internal param string $storableClass class name of a storable implementation
      */
     public function restore($storable)
     {

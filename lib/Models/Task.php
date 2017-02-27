@@ -4,7 +4,9 @@ namespace Automile\Sdk\Models;
 
 /**
  * Task Model
- * @package Automile\Sdk\Models
+ *
+ * @method Task setTaskId(int $taskId)
+ * @method int getTaskId()
  */
 class Task extends ModelAbstract
 {

@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * ExpenseReportRow Model
- * @package Automile\Sdk\Models
  *
  * @method int getExpenseReportRowId() (integer, optional),
  * @method int getExpenseReportId()

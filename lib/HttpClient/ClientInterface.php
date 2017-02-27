@@ -5,6 +5,9 @@ namespace Automile\Sdk\HttpClient;
 use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\HttpClient\Response\ResponseInterface;
 
+/**
+ * ClientInterface should be implemented by any HTTP clients used by the component
+ */
 interface ClientInterface
 {
 

@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Geofence Rowset Model
- * @package Automile\Sdk\Models
  */
 class GeofenceRowset extends ModelRowsetAbstract
 {

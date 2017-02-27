@@ -6,7 +6,6 @@ use Automile\Sdk\Types\PublishSubscribeAuthenticationType;
 
 /**
  * PublishSubscribeAuthenticationSalesforce Model
- * @package Automile\Sdk\Models
  */
 class Salesforce extends AuthenticationAbstract
 {

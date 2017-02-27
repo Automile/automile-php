@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * GeofencePolygon Model
- * @package Automile\Sdk\Models
  */
 class GeofencePolygon extends ModelRowsetAbstract
 {
@@ -19,6 +18,10 @@ class GeofencePolygon extends ModelRowsetAbstract
         return new GeographicPosition($properties);
     }
 
+    /**
+     * Export the object data into an array
+     * @return array
+     */
     public function toArray()
     {
         return ['Coordinates' => parent::toArray()];

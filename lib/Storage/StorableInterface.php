@@ -5,7 +5,6 @@ namespace Automile\Sdk\Storage;
 
 /**
  * The interface should be implemented by all objects using the storage component
- * @package Automile\Sdk\Storage
  */
 interface StorableInterface
 {

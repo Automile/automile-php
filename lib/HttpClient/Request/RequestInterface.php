@@ -4,7 +4,6 @@ namespace Automile\Sdk\HttpClient\Request;
 
 /**
  * Interface RequestInterface
- * @package Automile\Sdk\HttpClient
  */
 interface RequestInterface
 {

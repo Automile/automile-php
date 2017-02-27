@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * ExpenseReportRowContent Rowset Model
- * @package Automile\Sdk\Models
  */
 class ExpenseReportRowContentRowset extends ModelRowsetAbstract
 {

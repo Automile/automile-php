@@ -21,7 +21,6 @@ use Automile\Sdk\Models\VehicleSpeedRowset;
 
 /**
  * Trip API methods
- * @package Automile\Sdk\Endpoints
  */
 trait Trip
 {
@@ -286,6 +285,7 @@ trait Trip
      * Updates the given trip with a trip type (category) and trip tags
      * @param TripModel $trip
      * @return TripModel
+     * @throws AutomileException
      */
     public function editTrip(TripModel $trip)
     {
@@ -387,7 +387,7 @@ trait Trip
     /**
      * Get the details about the trip including driving events, speeding and idling
      * @param int $tripId
-     * @return TripModel
+     * @return TripConcatenation
      * @throws AutomileException
      */
     public function getCompletedTripDetails($tripId)
@@ -413,7 +413,7 @@ trait Trip
     /**
      * Get the advanced details about the trip including driving events, speeding, idling, speed and rpm data series
      * @param int $tripId
-     * @return TripModel
+     * @return TripConcatenation
      * @throws AutomileException
      */
     public function getCompletedTripDetailsAdvanced($tripId)

@@ -9,6 +9,9 @@ use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\HttpClient\Response\ResponseInterface;
 use Automile\Sdk\Models\User;
 
+/**
+ * OAuth HTTP Client
+ */
 class Http
 {
 

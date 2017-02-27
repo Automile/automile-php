@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * DeviceEventStatus Model
- * @package Automile\Sdk\Models
  *
  * @method string getStatus()
  * @method string getDescription()

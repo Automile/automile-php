@@ -9,7 +9,6 @@ use Automile\Sdk\Models\ContactRowset;
 
 /**
  * Contacts API methods
- * @package Automile\Sdk\Endpoints
  */
 trait Contact
 {

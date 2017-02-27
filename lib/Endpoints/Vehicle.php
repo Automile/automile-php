@@ -12,7 +12,6 @@ use Automile\Sdk\Models\VehicleCheckIn;
 
 /**
  * Vehicle API methods
- * @package Automile\Sdk\Endpoints
  */
 trait Vehicle
 {
@@ -126,6 +125,7 @@ trait Vehicle
      * Updates the given vehicle with new model
      * @param Vehicle2 $vehicle
      * @return Vehicle2
+     * @throws AutomileException
      */
     public function editVehicle(Vehicle2 $vehicle)
     {

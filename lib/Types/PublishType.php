@@ -4,7 +4,6 @@ namespace Automile\Sdk\Types;
 
 /**
  * PublishType Enum
- * @package Automile\Sdk\Types
  */
 class PublishType
 {

@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleMilEvent Rowset Model
- * @package Automile\Sdk\Models
  */
 class VehicleMilEventRowset extends ModelRowsetAbstract
 {

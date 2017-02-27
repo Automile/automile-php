@@ -8,6 +8,9 @@ use Automile\Sdk\Models\DeviceEventMil;
 use Automile\Sdk\Models\DeviceEventRowset;
 use Automile\Sdk\Models\DeviceEventStatus;
 
+/**
+ * DeviceEvent API Queries
+ */
 trait DeviceEvent
 {
 

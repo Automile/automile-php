@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * PublishSubscribe Rowset Model
- * @package Automile\Sdk\Models
  */
 class PublishSubscribeRowset extends ModelRowsetAbstract
 {

@@ -4,7 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehiclePlace Model
- * @package Automile\Sdk\Models
+ * 
  * @method int getVehiclePlaceId()
  * @method int getVehicleId()
  * @method string getDescription()

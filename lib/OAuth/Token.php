@@ -5,6 +5,9 @@ namespace Automile\Sdk\OAuth;
 
 use Automile\Sdk\Storage\StorableInterface;
 
+/**
+ * OAuth Token implementation
+ */
 class Token implements StorableInterface
 {
 
@@ -42,6 +45,10 @@ class Token implements StorableInterface
         $this->_type = $type;
     }
 
+    /**
+     * @return bool
+     * @throws OAuthException
+     */
     public function isExpired()
     {
         if (!$this->_expiration) {

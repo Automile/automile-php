@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Contact Model
- * @package Automile\Sdk\Models
  */
 class Contact extends ModelAbstract
 {

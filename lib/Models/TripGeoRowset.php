@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * TripGeo Rowset Model
- * @package Automile\Sdk\Models
  */
 class TripGeoRowset extends ModelRowsetAbstract
 {

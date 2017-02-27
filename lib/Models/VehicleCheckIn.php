@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Class VehicleCheckIn
- * @package Automile\Sdk\Models
  */
 class VehicleCheckIn extends ModelAbstract
 {

@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Test Cases for HttpRequest class
- * @package Automile\Sdk\Tests\Unit\HttpClient
  */
 class HttpRequestTest extends TestCase
 {

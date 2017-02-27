@@ -9,7 +9,6 @@ use Automile\Sdk\Models\VehicleGeofenceRowset;
 
 /**
  * VehicleGeofence API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait VehicleGeofence
 {

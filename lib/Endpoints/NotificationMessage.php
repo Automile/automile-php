@@ -8,7 +8,6 @@ use Automile\Sdk\Models\TriggerMessageHistoryRowset;
 
 /**
  * NotificationMessages API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait NotificationMessage
 {

@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * DeviceEventMil Model
- * @package Automile\Sdk\Models
  *
  * @method bool getMilStatus(),
  * @method int getNumberOfDTCs(),

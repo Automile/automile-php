@@ -8,7 +8,6 @@ use Automile\Sdk\Models\CompanyRowset;
 
 /**
  * Fleet API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait Fleet
 {

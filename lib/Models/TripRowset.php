@@ -2,7 +2,9 @@
 
 namespace Automile\Sdk\Models;
 
-
+/**
+ * Trip Rowset Model
+ */
 class TripRowset extends ModelRowsetAbstract
 {
 

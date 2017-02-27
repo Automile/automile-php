@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleDtcEventDetail Rowset Model
- * @package Automile\Sdk\Models
  */
 class VehicleDtcEventDetailRowset extends ModelRowsetAbstract
 {

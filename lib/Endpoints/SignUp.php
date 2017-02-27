@@ -8,7 +8,6 @@ use Automile\Sdk\Models\User;
 
 /**
  * SignUp Trait to be used in AutomileClient
- * @package Automile\Sdk\Clients
  */
 trait SignUp
 {

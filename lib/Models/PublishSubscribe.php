@@ -7,7 +7,6 @@ use Automile\Sdk\Types\PublishType;
 
 /**
  * PublishSubscribe Model
- * @package Automile\Sdk\Models
  *
  * @see PublishSubscribeAuthenticationType
  * @see PublishType

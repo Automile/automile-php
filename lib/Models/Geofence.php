@@ -4,7 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * Geofence Model
- * @package Automile\Sdk\Models
+ * 
  * @method int getGeofenceId()
  * @method string getName()
  * @method string getDescription()

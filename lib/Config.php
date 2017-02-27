@@ -11,6 +11,9 @@ use Automile\Sdk\HttpClient\Response\JsonResponse;
 use Automile\Sdk\HttpClient\Response\ResponseInterface;
 use Automile\Sdk\Models\User;
 
+/**
+ * SDK Configuration tools
+ */
 class Config
 {
 
@@ -48,17 +51,17 @@ class Config
     private static $_apiSecret;
 
     /**
-     * @var RequestInterface
+     * @var string
      */
     private static $_requestClass;
 
     /**
-     * @var ResponseInterface
+     * @var string
      */
     private static $_responseClass;
 
     /**
-     * @var ClientInterface
+     * @var string
      */
     private static $_httpClientClass;
 
@@ -234,6 +237,8 @@ class Config
         self::setPassword($user->getPassword());
         self::setApiClient($user->getAPIClientIdentifier());
         self::setApiSecret($user->getAPIClientSecret());
+
+        return true;
     }
 
 }

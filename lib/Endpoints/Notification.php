@@ -10,7 +10,6 @@ use Automile\Sdk\Models\TriggerRowset;
 
 /**
  * Notification (Trigger) API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait Notification
 {

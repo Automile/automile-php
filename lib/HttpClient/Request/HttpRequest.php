@@ -6,7 +6,6 @@ use Automile\Sdk\Config;
 
 /**
  * Class Http
- * @package Automile\Sdk\HttpClient
  */
 class HttpRequest implements RequestInterface
 {

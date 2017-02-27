@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Trigger Rowset Model
- * @package Automile\Sdk\Models
  */
 class TriggerRowset extends ModelRowsetAbstract
 {

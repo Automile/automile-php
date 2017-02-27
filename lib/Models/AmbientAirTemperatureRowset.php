@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * AmbientAirTemperature Rowset Model
- * @package Automile\Sdk\Models
  */
 class AmbientAirTemperatureRowset extends ModelRowsetAbstract
 {

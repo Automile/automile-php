@@ -10,7 +10,6 @@ use Automile\Sdk\Types\PublishType;
 
 /**
  * PublishSubscribe API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait PublishSubscribe
 {
@@ -80,7 +79,7 @@ trait PublishSubscribe
      * @param AuthenticationAbstract|int $tokenOrVehicleId Optional authentication token object or vehicleID
      * @param int $vehicleId Optional if you want only to subscribe to a specific vehicle
      * @return PublishSubscribeModel
-     *
+     * @throws AutomileException
      * @example PublishSubscribeModel editPublishSubscribe(int $publishSubscribeId, string $url, int $vehicleId = null)
      * @example PublishSubscribeModel editPublishSubscribe(int $publishSubscribeId, string $url, AuthenticationAbstract $token, int $vehicleId = null)
      * @example PublishSubscribeModel editPublishSubscribe(int $publishSubscribeId, PublishSubscribeModel $model)

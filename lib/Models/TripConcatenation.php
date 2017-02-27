@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * TripConcatenation Model
- * @package Automile\Sdk\Models
  */
 class TripConcatenation extends ModelAbstract
 {

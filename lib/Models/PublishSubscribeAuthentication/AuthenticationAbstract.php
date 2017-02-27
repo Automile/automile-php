@@ -7,7 +7,6 @@ use Automile\Sdk\Types\PublishSubscribeAuthenticationType;
 
 /**
  * PublishSubscribeAuthentication abstract model
- * @package Automile\Sdk\Models
  */
 abstract class AuthenticationAbstract extends ModelAbstract
 {

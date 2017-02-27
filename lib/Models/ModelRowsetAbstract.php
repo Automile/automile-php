@@ -5,7 +5,6 @@ namespace Automile\Sdk\Models;
 /**
  * Abstract class to be inherited by all rowset models
  * utilizes deferred object instantiation
- * @package Automile\Sdk\Models
  */
 abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
 {
@@ -29,31 +28,61 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
         $this->pushMany($rows);
     }
 
+    /**
+     * set the internal pointer to the first element
+     * @see \Iterator
+     */
     function rewind()
     {
         $this->_position = 0;
     }
 
+    /**
+     * retrieve the current element
+     * @see \Iterator
+     * @return ModelAbstract
+     */
     function current()
     {
         return $this->offsetGet($this->_position);
     }
 
+    /**
+     * retrieve the internal pointer position
+     * @see \Iterator
+     * @return int
+     */
     function key()
     {
         return $this->_position;
     }
 
+    /**
+     * move pointer to the next element
+     * @see \Iterator
+     */
     function next()
     {
         $this->_position++;
     }
 
+    /**
+     * determine whether the current pointer position is valid
+     * @see \Iterator
+     * @return bool
+     */
     function valid()
     {
         return $this->offsetExists($this->_position);
     }
 
+    /**
+     * assign an element to the specified position in the rowset
+     * @param int $offset
+     * @param array|object $model
+     * @throws ModelException
+     * @see \ArrayAccess
+     */
     public function offsetSet($offset, $model)
     {
         if (!$model instanceof ModelAbstract) {
@@ -63,14 +92,34 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
         $this->push($model, $offset);
     }
 
+    /**
+     * determine whether an element exists under specified offset
+     * @param int $offset
+     * @return bool
+     * @see \ArrayAccess
+     */
     public function offsetExists($offset) {
         return isset($this->_models[$offset]);
     }
 
+    /**
+     * unset an element under specified offset
+     * @param mixed $offset
+     * @see \ArrayAccess
+     */
     public function offsetUnset($offset) {
         unset($this->_models[$offset]);
     }
 
+    /**
+     * retrieve an element under specified offset
+     * the method uses lazy loading
+     * if the element hasn't been wrapped into a Model object yet, the model instantiation will be performed
+     *
+     * @param int $offset
+     * @return ModelAbstract|null
+     * @see \ArrayAccess
+     */
     public function offsetGet($offset) {
         if (isset($this->_models[$offset])) {
            if (!is_object($this->_models[$offset]) || !$this->_models[$offset] instanceof ModelAbstract) {
@@ -84,8 +133,9 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
     }
 
     /**
+     * push an element into the rowset
      * @param array|object $row
-     * @param null $offset
+     * @param int $offset if missing, the element is pushed into the end of the rowset
      * @return ModelRowsetAbstract
      * @throws ModelException
      */

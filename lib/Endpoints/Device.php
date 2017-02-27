@@ -8,7 +8,6 @@ use Automile\Sdk\Models\Device as DeviceModel;
 
 /**
  * Device API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait Device
 {

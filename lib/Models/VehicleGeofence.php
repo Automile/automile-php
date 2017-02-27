@@ -4,7 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleGeofence Model
- * @package Automile\Sdk\Models
+ * 
  * @method int getVehicleGeofenceId()
  * @method int getVehicleId()
  * @method int getGeofenceId()

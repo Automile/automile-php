@@ -7,7 +7,6 @@ use Automile\Sdk\AutomileException;
 
 /**
  * Class StorageException
- * @package Automile\Sdk\Storage
  */
 class StorageException extends AutomileException
 {

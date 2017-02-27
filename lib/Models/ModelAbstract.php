@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Abstract class to be inherited by all models
- * @package Automile\Sdk\Models
  */
 abstract class ModelAbstract
 {
@@ -65,7 +64,7 @@ abstract class ModelAbstract
     /**
      * @param string $method
      * @param array $args
-     * @return ModelAb|string|null
+     * @return ModelAbstract|string|null
      * @throws ModelException
      */
     public function __call($method, array $args)

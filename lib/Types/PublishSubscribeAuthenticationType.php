@@ -4,7 +4,6 @@ namespace Automile\Sdk\Types;
 
 /**
  * PublishSubscribeAuthenticationType Enum
- * @package Automile\Sdk\Types
  */
 class PublishSubscribeAuthenticationType
 {

@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * DeviceEventDtc Model
- * @package Automile\Sdk\Models
  *
  * @method DeviceDtcRowset getDtcs()
  * @method string getDescription()

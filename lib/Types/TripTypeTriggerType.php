@@ -4,7 +4,6 @@ namespace Automile\Sdk\Types;
 
 /**
  * TripTypeTrigger Type
- * @package Automile\Sdk\Types
  */
 class TripTypeTriggerType
 {

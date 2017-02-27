@@ -7,7 +7,6 @@ use Automile\Sdk\Models\ExpenseReport as ExpenseReportModel;
 
 /**
  * ExpenseReport API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait ExpenseReport
 {

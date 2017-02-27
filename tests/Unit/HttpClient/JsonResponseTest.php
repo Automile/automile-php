@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Test Cases for JsonResponse class
- * @package Automile\Sdk\Tests\Unit\HttpClient
  */
 class JsonResponseTest extends TestCase
 {

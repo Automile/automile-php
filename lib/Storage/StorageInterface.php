@@ -4,7 +4,6 @@ namespace Automile\Sdk\Storage;
 
 /**
  * Interface to be implemented by all storage concrete classes
- * @package Automile\Sdk\Storage
  */
 interface StorageInterface
 {

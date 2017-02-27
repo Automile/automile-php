@@ -33,7 +33,6 @@ use Automile\Sdk\Endpoints\VehicleHealth;
 /**
  * Automile PHP SDK Facade object
  * provides a convenient interface to the package
- * @package Automile\Sdk
  */
 class AutomileClient
 {
@@ -264,7 +263,7 @@ class AutomileClient
     /**
      * @param string $uri
      * @param int $id
-     * @param ModelAbstract $vehicle
+     * @param ModelAbstract $model
      * @return ModelAbstract
      * @throws AutomileException
      */
@@ -293,6 +292,7 @@ class AutomileClient
 
     /**
      * Removes the given vehicle
+     * @param string $uri
      * @param int $id
      * @return bool
      * @throws AutomileException

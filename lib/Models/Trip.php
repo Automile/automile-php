@@ -4,7 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * Trip Model
- * @package Automile\Sdk\Models
+ * 
  * @method int getTripId()
  * @method int getVehicleId()
  */

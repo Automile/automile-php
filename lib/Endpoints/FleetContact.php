@@ -9,7 +9,6 @@ use Automile\Sdk\Models\CompanyContactRowset;
 
 /**
  * FleetContact API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait FleetContact
 {

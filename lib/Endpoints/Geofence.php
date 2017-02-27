@@ -3,13 +3,11 @@
 namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
-use Automile\Sdk\Config;
 use Automile\Sdk\Models\GeofenceRowset;
 use Automile\Sdk\Models\Geofence as GeofenceModel;
 
 /**
  * Geofence API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait Geofence
 {

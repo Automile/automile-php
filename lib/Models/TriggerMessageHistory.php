@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * TriggerMessageHistory Model
- * @package Automile\Sdk\Models
  */
 class TriggerMessageHistory extends ModelAbstract
 {

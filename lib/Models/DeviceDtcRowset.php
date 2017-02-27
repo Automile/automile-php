@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * DeviceDtc Rowset Model
- * @package Automile\Sdk\Models
  */
 class DeviceDtcRowset extends ModelRowsetAbstract
 {

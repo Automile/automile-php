@@ -9,7 +9,6 @@ use Automile\Sdk\Models\VehiclePlaceRowset;
 
 /**
  * VehiclePlace API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait VehiclePlace
 {

@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Company Rowset Model
- * @package Automile\Sdk\Models
  */
 class CompanyRowset extends ModelRowsetAbstract
 {

@@ -6,7 +6,6 @@ use Automile\Sdk\Types\ContentType;
 
 /**
  * ExpenseReportRowContent Model
- * @package Automile\Sdk\Models
  *
  * @see ContentType
  *

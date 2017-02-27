@@ -4,7 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * Device Model
- * @package Automile\Sdk\Models
+ * 
  * @method int getIMEIConfigId()
  * @method Device setIMEIConfigId($id)
  * @method string getIMEI()

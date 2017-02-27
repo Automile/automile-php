@@ -4,7 +4,6 @@ namespace Automile\Sdk\HttpClient\Response;
 
 /**
  * Class JsonResponse
- * @package Automile\Sdk\HttpClient
  */
 class JsonResponse implements ResponseInterface
 {

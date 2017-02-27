@@ -8,7 +8,6 @@ use Automile\Sdk\HttpClient\Response\ResponseInterface;
 
 /**
  * Default Automile SDK HTTP client
- * @package Automile\Sdk\HttpClient
  */
 class Curl implements ClientInterface
 {

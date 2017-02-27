@@ -8,7 +8,6 @@ use Automile\Sdk\Models\VehicleHealth as VehicleHealthModel;
 
 /**
  * VehicleHealth API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait VehicleHealth
 {
@@ -20,6 +19,7 @@ trait VehicleHealth
      * @param int $vehicleId
      * @param string $datePeriod optional
      * @return VehicleHealthModel
+     * @throws AutomileException
      */
     public function getVehicleHealthByVehicleId($vehicleId, $datePeriod = null)
     {

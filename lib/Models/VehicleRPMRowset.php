@@ -2,7 +2,9 @@
 
 namespace Automile\Sdk\Models;
 
-
+/**
+ * Class VehicleRPMRowset
+ */
 class VehicleRPMRowset extends ModelRowsetAbstract
 {
 

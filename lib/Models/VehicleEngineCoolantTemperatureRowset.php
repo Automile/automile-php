@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleEngineCoolantTemperature Rowset Model
- * @package Automile\Sdk\Models
  */
 class VehicleEngineCoolantTemperatureRowset extends ModelRowsetAbstract
 {

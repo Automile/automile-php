@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleHealth Model
- * @package Automile\Sdk\Models
  */
 class VehicleHealth extends ModelAbstract
 {

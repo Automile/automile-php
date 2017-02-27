@@ -4,7 +4,7 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleSpeed Model
- * @package Automile\Sdk\Models
+ * 
  * @method float getSpeedKmPerHour()
  * @method string getRecordTimeStamp()
  */

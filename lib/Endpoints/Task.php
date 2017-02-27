@@ -8,7 +8,6 @@ use Automile\Sdk\Models\Task as TaskModel;
 
 /**
  * Task API Queries
- * @package Automile\Sdk\Endpoints
  */
 trait Task
 {

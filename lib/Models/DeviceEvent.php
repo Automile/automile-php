@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * DeviceEvent Model
- * @package Automile\Sdk\Models
  *
  * @method int getIMEIEventId()
  * @method string getIMEI()

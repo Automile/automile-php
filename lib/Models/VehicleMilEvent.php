@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * VehicleMilEvent Model
- * @package Automile\Sdk\Models
  */
 class VehicleMilEvent extends ModelAbstract
 {

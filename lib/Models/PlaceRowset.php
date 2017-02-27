@@ -4,7 +4,6 @@ namespace Automile\Sdk\Models;
 
 /**
  * Place Rowset Model
- * @package Automile\Sdk\Models
  */
 class PlaceRowset extends ModelRowsetAbstract
 {
