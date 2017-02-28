@@ -52,6 +52,7 @@ class Http
     public function createToken(User $user)
     {
         $this->_request->setHttpAuth($user->getAPIClientIdentifier(), $user->getAPIClientSecret())
+            ->setMethod(Config::METHOD_POST)
             ->setUri(Config::URI_OAUTH_TOKEN)
             ->setPostParam('grant_type', 'password')
             ->setPostParam('username', $user->getUsername())

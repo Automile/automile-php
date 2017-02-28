@@ -1,0 +1,38 @@
+<?php
+
+namespace Automile\Sdk\Types;
+
+/**
+ * TriggerType
+ */
+class TriggerType
+{
+
+    const FIRMWARE_CONFIGURATION_UPDATE = 0;
+    const FIRST_TRIP_WELCOME_MESSAGE = 1;
+    const MIL_STATUS_ON_OFF = 2;
+    const DTC_CODES = 3;
+    const DEVICE_CONNECT = 4;
+    const DEVICE_DISCONNECT = 5;
+    const DIAGNOSTIC_ERROR = 6;
+    const DIAGNOSTIC_ERROR2 = 7;
+    const DEVICE_STILL_NOT_CONNECTED = 8;
+    const ENGINE_COOLANT_TEMPERATURE_THRESHOLD_REACHED = 9;
+    const SPEED_NOTIFICATION = 10;
+    const VEHICLE_INFORMATION_FOUND = 11;
+    const BATTERY_SHUTDOWN = 12;
+    const GEOFENCE = 13;
+    const MONTHLY_TRIP_JOURNAL_REPORT = 14;
+    const TRIP_END = 15;
+    const TRIP_START = 16;
+    const ODOMETER_END = 17;
+    const ACCIDENT = 18;
+    const VEHICLE_INSPECTION_PERIOD_START_REMINDER = 20;
+    const VEHICLE_INSPECTION_IN_PERIOD_REMINDER = 21;
+    const SUMMARY_OF_FIRST_TRIPS = 22;
+    const ODOMETER_EVENT = 24;
+    const WEATHER_FORECAST = 25;
+    const PENDING_DTC_CODES = 26;
+    const TRIP_WITH_UNKNOWN_DRIVER = 36;
+
+}

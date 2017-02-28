@@ -135,6 +135,26 @@ class AutomileClient
         return $token ? new self($token) : new self();
     }
 
+    public function validateToken()
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri('/v1/echo/validatetoken');
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return 'You have valid token' == $response->getBody();
+        }
+
+        throw new AutomileException($response->getErrorMessage());
+    }
+
     /**
      * @param User $user
      * @return Token

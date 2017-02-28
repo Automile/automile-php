@@ -106,13 +106,21 @@ abstract class ModelAbstract
     public function toArray()
     {
         $values = [];
-        foreach ($this->_properties as $key => $value) {
-            if ($value instanceof ModelAbstract || $value instanceof ModelRowsetAbstract) {
-                $value = $value->toArray();
+
+        foreach ($this->_allowedProperties as $key) {
+            $methodName = 'get' . ucfirst($key);
+
+            if (method_exists($this, $methodName)) {
+                $values[$key] = $this->$methodName();
+            } elseif (array_key_exists($key, $this->_properties)) {
+                $values[$key] = $this->_properties[$key];
             }
 
-            $values[$key] = $value;
+            if (!empty($values[$key]) && ($values[$key] instanceof ModelAbstract || $values[$key] instanceof ModelRowsetAbstract)) {
+                $values[$key] = $values[$key]->toArray();
+            }
         }
+
         return $values;
     }
 

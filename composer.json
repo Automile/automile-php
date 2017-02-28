@@ -16,18 +16,10 @@
     ],
     "require": {
         "php": ">=5.4",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.0"
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": { "Automile\\Sdk\\" : "lib/" }
-    },
-    "autoload-dev": {
-        "psr-4": { "Automile\\Sdk\\Tests\\" : "tests/" }
     },
     "version": "0.1"
 }

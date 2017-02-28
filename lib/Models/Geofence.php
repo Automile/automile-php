@@ -33,12 +33,10 @@ class Geofence extends ModelAbstract
     {
         if (!is_object($rows) || !$rows instanceof GeofencePolygon) {
             $rows = new GeofencePolygon($rows);
-        } else {
-            $rows = (array)$rows;
-            $rows = new GeofencePolygon(empty($rows['Coordinates']) ? [] : $rows['Coordinates']);
         }
 
         $this->_properties['GeofencePolygon'] = $rows;
+
         return $this;
     }
 
