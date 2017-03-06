@@ -4,7 +4,7 @@ namespace Automile\Sdk\OAuth;
 
 
 use Automile\Sdk\Config;
-use Automile\Sdk\HttpClient\ClientInterface;
+use Automile\Sdk\HttpClient\Client\ClientInterface;
 use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\HttpClient\Response\ResponseInterface;
 use Automile\Sdk\Models\User;

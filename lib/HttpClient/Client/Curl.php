@@ -1,8 +1,9 @@
 <?php
 
-namespace Automile\Sdk\HttpClient;
+namespace Automile\Sdk\HttpClient\Client;
 
 use Automile\Sdk\Config;
+use Automile\Sdk\HttpClient\HttpClientException;
 use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\HttpClient\Response\ResponseInterface;
 
@@ -27,6 +28,11 @@ class Curl implements ClientInterface
      * @var resource
      */
     private $_curl;
+
+    /**
+     * @var CurlAdapter
+     */
+    private $_curlAdapter;
 
     /**
      * @param RequestInterface $request
@@ -82,31 +88,31 @@ class Curl implements ClientInterface
     {
         $request = $this->_request;
 
-        $curl = curl_init($this->_getUrl());
+        $curl = $this->getAdapter()->curlInit($this->_getUrl());
 
-        curl_setopt($curl, CURLOPT_HEADER, 1);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_ENCODING, "gzip");
+        $this->getAdapter()->curlSetopt($curl, CURLOPT_HEADER, 1);
+        $this->getAdapter()->curlSetopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $this->getAdapter()->curlSetopt($curl, CURLOPT_ENCODING, "gzip");
 
         $headers = [];
         foreach ($request->getHeaders() as $header => $value) {
             $headers[] = "{$header}: {$value}";
         }
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $this->getAdapter()->curlSetopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getBody() ?: '');
+        $this->getAdapter()->curlSetopt($curl, CURLOPT_POSTFIELDS, $request->getBody() ?: '');
 
         switch ($request->getMethod()) {
             case Config::METHOD_GET:
-                curl_setopt($curl, CURLOPT_HTTPGET, 1);
+                $this->getAdapter()->curlSetopt($curl, CURLOPT_HTTPGET, 1);
                 break;
             case Config::METHOD_POST:
-                curl_setopt($curl, CURLOPT_POST, 1);
+                $this->getAdapter()->curlSetopt($curl, CURLOPT_POST, 1);
                 break;
             case Config::METHOD_PUT:
                 // break intentionally omitted
             case Config::METHOD_DELETE:
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($request->getMethod()));
+                $this->getAdapter()->curlSetopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($request->getMethod()));
                 break;
             default:
                 throw new HttpClientException("HTTP method '{$request->getMethod()}' is not supported");
@@ -141,14 +147,35 @@ class Curl implements ClientInterface
     {
         $curl = $this->_curl;
 
-        $content = curl_exec($curl);
+        $content = $this->getAdapter()->curlExec($curl);
 
-        $headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $headerSize = $this->getAdapter()->curlGetInfo($curl, CURLINFO_HEADER_SIZE);
         $response->setHeaders(substr($content, 0, $headerSize))
             ->setBody(substr($content, $headerSize))
-            ->setStatusCode(curl_getinfo($curl, CURLINFO_HTTP_CODE));
+            ->setStatusCode($this->getAdapter()->curlGetInfo($curl, CURLINFO_HTTP_CODE));
 
         return $response;
+    }
+
+    /**
+     * Replace the default CurlAdapter with a custom one if needed
+     * @param CurlAdapter $adapter
+     */
+    public function setAdapter(CurlAdapter $adapter)
+    {
+        $this->_curlAdapter = $adapter;
+    }
+
+    /**
+     * @return CurlAdapter
+     */
+    public function getAdapter()
+    {
+        if (null === $this->_curlAdapter) {
+            $this->_curlAdapter = new CurlAdapter();
+        }
+
+        return $this->_curlAdapter;
     }
 
 }

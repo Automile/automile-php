@@ -21,5 +21,11 @@
     "autoload": {
         "psr-4": { "Automile\\Sdk\\" : "lib/" }
     },
-    "version": "0.1"
+    "version": "0.1",
+    "scripts": {
+        "test": [
+            "cd tests && ../../vendor/bin/phpunit --testsuite unit",
+            "cd tests && ../../vendor/bin/phpunit --testsuite integration"
+        ]
+    }
 }

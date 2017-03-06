@@ -1,6 +1,6 @@
 <?php
 
-namespace Automile\Sdk\HttpClient;
+namespace Automile\Sdk\HttpClient\Client;
 
 use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\HttpClient\Response\ResponseInterface;

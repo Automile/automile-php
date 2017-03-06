@@ -3,8 +3,8 @@
 namespace Automile\Sdk;
 
 
-use Automile\Sdk\HttpClient\ClientInterface;
-use Automile\Sdk\HttpClient\Curl;
+use Automile\Sdk\HttpClient\Client\ClientInterface;
+use Automile\Sdk\HttpClient\Client\Curl;
 use Automile\Sdk\HttpClient\Request\HttpRequest;
 use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\HttpClient\Response\JsonResponse;
