@@ -1,16 +1,14 @@
 {
     "name": "automile/automile-php",
     "description": "Automile API SDK",
-    "keywords": [
-        "php",
-        "sdk",
-        "api"
-    ],
+    "type": "library",
+    "keywords": ["php", "sdk", "api"],
     "homepage": "https://github.com/Automile/automile-php",
     "license": "MIT",
     "authors": [
         {
-            "name": "Automile <support@automile.com>",
+            "name": "Automile",
+            "email": "support@automile.com",
             "homepage": "https://automile.com"
         }
     ],
@@ -21,7 +19,6 @@
     "autoload": {
         "psr-4": { "Automile\\Sdk\\" : "lib/" }
     },
-    "version": "0.1",
     "scripts": {
         "test": [
             "cd tests && ../../vendor/bin/phpunit --testsuite unit",
