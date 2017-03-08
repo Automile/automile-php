@@ -100,7 +100,7 @@ $client = AutomileClient::fromSavedToken(AUTOMILE_TOKEN);
 $client->saveToken(AUTOMILE_TOKEN);
 
 // confirm everything's been set up correctly
-$isValid = $client->validateToken()
+$isValid = $client->validateToken();
 var_dump($isValid);
 ```
 
