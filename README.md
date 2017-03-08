@@ -86,7 +86,7 @@ use Automile\Sdk\Models;
 define('AUTOMILE_TOKEN', '/path/to/storage/automile-token.json');
 
 // Automile account credentials
-// see also [Sign Up](#sign-up) section
+// see also Sign Up section above
 Config::setUsername('username@example.com');
 Config::setPassword('*****');
 Config::setApiClient('*****.automile.com');

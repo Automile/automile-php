@@ -44,11 +44,12 @@ class JsonResponse implements ResponseInterface
     public function setHeaders($headers)
     {
         $headers = explode(self::LINE_SEPARATOR, trim($headers));
-        array_shift($headers);
 
         foreach ($headers as $i => $line) {
-            list ($key, $value) = explode(': ', $line);
-            $this->_headers[$key] = $value;
+            if (strpos($line, ': ')) {
+                list ($key, $value) = explode(': ', $line);
+                $this->_headers[$key] = $value;
+            }
         }
 
         return $this;
