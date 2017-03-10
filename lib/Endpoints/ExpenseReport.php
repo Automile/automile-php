@@ -15,7 +15,7 @@ use Automile\Sdk\Models\ExpenseReportsEmail;
 trait ExpenseReport
 {
 
-    protected $_expenseReportUri = '/v1/resourceowner/expensereport';
+    private $_expenseReportUri = '/v1/resourceowner/expensereport';
 
     /**
      * Get a list of expense reports
