@@ -9,6 +9,7 @@ abstract class ModelAbstract
 {
 
     /**
+     * property values assigned to a model
      * @var array
      */
     protected $_properties = [];

@@ -2,6 +2,8 @@
 
 namespace Automile\Sdk\Models;
 
+use Automile\Sdk\Exceptions\InvalidArgumentException;
+
 /**
  * GeographicPosition Model
  *
@@ -23,7 +25,7 @@ class GeographicPosition extends ModelAbstract
     public function setLatitude($lat)
     {
         if ($lat > 90 || $lat < -90) {
-            throw new ModelException("Latitude should be in range [-90, 90]");
+            throw new InvalidArgumentException("Latitude should be in range [-90, 90]");
         }
 
         $this->_properties['Latitude'] = $lat;
@@ -39,7 +41,7 @@ class GeographicPosition extends ModelAbstract
     public function setLongitude($lng)
     {
         if ($lng > 180 || $lng < -180) {
-            throw new ModelException("Longitude should be in range [-180, 180]");
+            throw new InvalidArgumentException("Longitude should be in range [-180, 180]");
         }
 
         $this->_properties['Longitude'] = $lng;
