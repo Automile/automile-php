@@ -3,7 +3,7 @@
 namespace Automile\Sdk\OAuth;
 
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 
 /**
  * Class OAuthException

@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Tests\Functional;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 
 /**
  * Functional Testing Exception

@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Exceptions;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 
 /**
  * InvalidArgument Exception

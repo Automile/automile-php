@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Endpoints;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Models\DeviceRowset;
 use Automile\Sdk\Models\Device as DeviceModel;
 

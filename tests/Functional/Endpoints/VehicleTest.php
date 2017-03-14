@@ -84,12 +84,6 @@ class VehicleTest extends TestAbstract
         $vehicle = self::_getClient()->createVehicle(new Vehicle2($params));
 
         $this->assertInstanceOf(Vehicle2::class, $vehicle);
-
-        if (!$vehicle->getVehicleId()) {
-            //TODO: remove when the API issue is resolved
-            $vehicle->setVehicleId(40878);
-        }
-
         $this->assertGreaterThan(0, $vehicle->getVehicleId());
 
         return $vehicle->getVehicleId();
@@ -118,12 +112,6 @@ class VehicleTest extends TestAbstract
 
         $vehicle = self::_getClient()->getVehicleById($vehicleId);
         $this->assertInstanceOf(Vehicle2::class, $vehicle);
-
-        if (!$vehicle->getVehicleId()) {
-            //TODO: remove when the API issue is resolved
-            $vehicle->setVehicleId($vehicleId);
-        }
-
         $this->assertEquals($vehicleId, $vehicle->getVehicleId());
         $this->assertArraySubset($params, $vehicle->toArray());
 

@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Endpoints;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Models\Company;
 use Automile\Sdk\Models\CompanyRowset;
 

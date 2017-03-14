@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Models;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 
 /**
  * Class ModelException

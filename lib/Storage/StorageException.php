@@ -3,7 +3,7 @@
 namespace Automile\Sdk\Storage;
 
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 
 /**
  * Class StorageException

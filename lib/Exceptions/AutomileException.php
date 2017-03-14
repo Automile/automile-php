@@ -1,6 +1,6 @@
 <?php
 
-namespace Automile\Sdk;
+namespace Automile\Sdk\Exceptions;
 
 /**
  * Base exception

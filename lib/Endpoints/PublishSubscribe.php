@@ -1,7 +1,7 @@
 <?php
 
 namespace Automile\Sdk\Endpoints;
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Models\PublishSubscribeAuthentication\AuthenticationAbstract;
 use Automile\Sdk\Models\PublishSubscribeRowset;
 use Automile\Sdk\Models\PublishSubscribe as PublishSubscribeModel;

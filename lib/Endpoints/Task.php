@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Endpoints;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Models\TaskRowset;
 use Automile\Sdk\Models\Task as TaskModel;
 

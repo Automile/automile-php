@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\HttpClient;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 
 /**
  * HttpClient Exception

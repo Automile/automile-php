@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Endpoints;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Models\GeofenceRowset;
 use Automile\Sdk\Models\Geofence as GeofenceModel;
 

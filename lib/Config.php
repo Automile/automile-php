@@ -3,6 +3,7 @@
 namespace Automile\Sdk;
 
 
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\HttpClient\Client\ClientInterface;
 use Automile\Sdk\HttpClient\Client\Curl;
 use Automile\Sdk\HttpClient\Request\HttpRequest;

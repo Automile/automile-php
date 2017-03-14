@@ -2,7 +2,7 @@
 
 namespace Automile\Sdk\Endpoints;
 
-use Automile\Sdk\AutomileException;
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Config;
 use Automile\Sdk\Exceptions\InvalidArgumentException;
 use Automile\Sdk\Models\Report\TripEmail;

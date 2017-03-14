@@ -2,6 +2,7 @@
 
 namespace Automile\Sdk;
 
+use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\HttpClient\Request\RequestInterface;
 use Automile\Sdk\Models\ModelAbstract;
 use Automile\Sdk\Models\ModelRowsetAbstract;
@@ -24,6 +25,7 @@ use Automile\Sdk\Endpoints\Fleet;
 use Automile\Sdk\Endpoints\FleetContact;
 use Automile\Sdk\Endpoints\VehicleGeofence;
 use Automile\Sdk\Endpoints\VehiclePlace;
+use Automile\Sdk\Endpoints\VehicleInspection;
 use Automile\Sdk\Endpoints\DeviceEvent;
 use Automile\Sdk\Endpoints\PublishSubscribe;
 use Automile\Sdk\Endpoints\ExpenseReport;
@@ -40,7 +42,7 @@ class AutomileClient
 {
 
     use SignUp, Vehicle, Trip, Contact, Geofence, Notification, NotificationMessage,
-        Place, Device, Task, Fleet, FleetContact, VehicleGeofence, VehiclePlace,
+        Place, Device, Task, Fleet, FleetContact, VehicleGeofence, VehiclePlace, VehicleInspection,
         DeviceEvent, PublishSubscribe, ExpenseReport, VehicleHealth, TaskMessage, Report;
 
     /**
