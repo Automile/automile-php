@@ -23,6 +23,9 @@
         "test": [
             "cd tests && ../../vendor/bin/phpunit --testsuite unit",
             "cd tests && ../../vendor/bin/phpunit --testsuite integration"
+        ],
+        "ftest": [
+            "cd tests && ../../vendor/bin/phpunit --testsuite functional"
         ]
     }
 }

@@ -6,7 +6,7 @@ namespace Automile\Sdk\Models;
  * Abstract class to be inherited by all rowset models
  * utilizes deferred object instantiation
  */
-abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
+abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess, \Countable
 {
 
     /**
@@ -26,6 +26,14 @@ abstract class ModelRowsetAbstract implements \Iterator, \ArrayAccess
     public function __construct($rows = [])
     {
         $this->pushMany($rows);
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->_models);
     }
 
     /**

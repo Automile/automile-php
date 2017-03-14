@@ -150,11 +150,11 @@ $vehicleStatus = $client->getStatusForVehicles();
 ```
 #### Check-in driver to vehicle
 ```php
-$client->checkInToVehicle(new Models\VehicleCheckIn([
+$client->checkInToVehicle(new Models\Vehicle\CheckIn([
     "ContactId" => 2,
     "VehicleId" => 33553,
     "DefaultTripType" => Types\TripType::AUTO, // Use the users schedule, place or other automation rules
-    "CheckOutAtUtc" = (new DateTime('now', 'UTC'))->add(new DateInterval('P3D')) // Use to schedule future auto-checkout, leave empty for permanent check-in
+    "CheckOutAtUtc" = (new \DateTime('now', 'UTC'))->add(new \DateInterval('P3D')) // Use to schedule future auto-checkout, leave empty for permanent check-in
 }));
 ```
 
@@ -529,7 +529,7 @@ $vehicleGeofenceRelationships = $client->getVehicleGeofenceById(44251);
 
 #### Create a relationship between a vehicle and a geofence
 ```php
-$newVehicleGeofenceRelationship = $client->createVehicleGeofence(new Models\VehicleGeofence([
+$newVehicleGeofenceRelationship = $client->createVehicleGeofence(new Models\Vehicle\Geofence([
     "GeofenceId" => 3276,
     "VehicleId" => 33553,
 	// Restrict when this geofence should be valid from and to if needed
@@ -540,11 +540,11 @@ $newVehicleGeofenceRelationship = $client->createVehicleGeofence(new Models\Vehi
 
 #### Edit a vehicle geofence relationship
 ```php
-$dateTime = new DateTime('now', new DateTimeZone('UTC'));
-$client->editVehicleGeofence(new Models\VehicleGeofence([
+$dateTime = new \DateTime('now', new \DateTimeZone('UTC'));
+$client->editVehicleGeofence(new Models\Vehicle\Geofence([
     "VehicleGeofenceId" => 44251,
 	"ValidFrom" => $dateTime->format('Y-m-d'),
-	"ValidTo" => $dateTime->add(new DateInterval('P7D'))->format('Y-m-d')
+	"ValidTo" => $dateTime->add(new \DateInterval('P7D'))->format('Y-m-d')
 }));
 ```
 
@@ -571,7 +571,7 @@ $vehiclePlaceRelationships = $client->getVehiclePlacesByPlaceId(44251);
 
 #### Create a relationship between a vehicle and a geofence
 ```php
-$newVehiclePlace = $client->createVehiclePlace(new Models\VehiclePlace([
+$newVehiclePlace = $client->createVehiclePlace(new Models\Vehicle\Place([
     "PlaceId" => 10977,
     "VehicleId" => 33553,
     "Description" => "Some description",
@@ -583,7 +583,7 @@ $newVehiclePlace = $client->createVehiclePlace(new Models\VehiclePlace([
 
 #### Edit a vehicle place relationship
 ```php
-$client->editVehiclePlace(new Models\VehiclePlace([
+$client->editVehiclePlace(new Models\Vehicle\Place([
     "VehiclePlaceId" => 30567,
     "Description" => "Some description",
     "Radius" => 100,
