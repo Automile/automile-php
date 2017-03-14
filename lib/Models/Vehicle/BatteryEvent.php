@@ -1,25 +1,36 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
 
 use Automile\Sdk\Exceptions\InvalidArgumentException;
+use Automile\Sdk\Models\ModelAbstract;
 
 /**
- * GeographicPosition Model
+ * VehicleBatteryEvent Model
  *
+ * @see \Automile\Sdk\Types\BatteryEventStatusType
+ *
+ * @method string getOccured()
  * @method float getLatitude()
  * @method float getLongitude()
+ * @method int getBatteryStatus()
+ *
+ * @method BatteryEvent setOccured(string $occured)
+ * @method BatteryEvent setBatteryStatus(int $status)
  */
-class GeographicPosition extends ModelAbstract
+class BatteryEvent extends ModelAbstract
 {
 
     protected $_allowedProperties = [
-        'Latitude', 'Longitude'
+        'Occured',
+        'Latitude',
+        'Longitude',
+        'BatteryStatus'
     ];
 
     /**
      * @param float $lat
-     * @return GeographicPosition
+     * @return BatteryEvent
      * @throws InvalidArgumentException
      */
     public function setLatitude($lat)
@@ -35,7 +46,7 @@ class GeographicPosition extends ModelAbstract
 
     /**
      * @param float $lng
-     * @return GeographicPosition
+     * @return BatteryEvent
      * @throws InvalidArgumentException
      */
     public function setLongitude($lng)

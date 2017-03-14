@@ -4,8 +4,8 @@ namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\VehicleGeofence as VehicleGeofenceModel;
-use Automile\Sdk\Models\VehicleGeofenceRowset;
+use Automile\Sdk\Models\Vehicle\Geofence as VehicleGeofenceModel;
+use Automile\Sdk\Models\Vehicle\GeofenceRowset;
 
 /**
  * VehicleGeofence API Queries
@@ -28,7 +28,7 @@ trait VehicleGeofence
     /**
      * Get all relationships between geofences and vehicles
      * @param int $geofenceId
-     * @return VehicleGeofenceRowset
+     * @return GeofenceRowset
      * @throws AutomileException
      */
     public function getVehicleGeofencesByGeofenceId($geofenceId)
@@ -46,7 +46,7 @@ trait VehicleGeofence
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new VehicleGeofenceRowset($response->getBody());
+            return new GeofenceRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());

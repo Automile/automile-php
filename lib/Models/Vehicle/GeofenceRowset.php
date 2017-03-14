@@ -1,21 +1,23 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelRowsetAbstract;
 
 /**
  * VehicleGeofence Rowset Model
  */
-class VehicleGeofenceRowset extends ModelRowsetAbstract
+class GeofenceRowset extends ModelRowsetAbstract
 {
 
     /**
      * Create new model to be added into the rowset
      * @param array|object $properties
-     * @return VehicleGeofence
+     * @return Geofence
      */
     public function getModel($properties)
     {
-        return new VehicleGeofence($properties);
+        return new Geofence($properties);
     }
 
 }

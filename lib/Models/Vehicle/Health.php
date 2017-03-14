@@ -1,11 +1,33 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelAbstract;
 
 /**
  * VehicleHealth Model
+ *
+ * @see \Automile\Sdk\Types\BatteryEventStatusType
+ *
+ * @method int getVehicleId()
+ * @method int getPeriodFrom()
+ * @method int getPeriodTo()
+ * @method int getLastBatteryStatus()
+ * @method BatteryEvent getLastBatteryWarning()
+ * @method BatteryEventRowset getBatteryEventsForSelectedPeriod()
+ * @method MilEvent getLastMILEvent()
+ * @method MilEventRowset getMILEventsForSelectedPeriod()
+ * @method DtcEvent getLastDTCEvent()
+ * @method DtcEvent getLastPendingDTCEvent()
+ * @method DtcEventDetailRowset getDTCEventsForSelectedPeriod()
+ * @method DtcEventDetailRowset getPendingDTCEventsForSelectedPeriod()
+ *
+ * @method Health setVehicleId(int $vehicleId)
+ * @method Health setPeriodFrom(int $periodFrom)
+ * @method Health setPeriodTo(int $periodTo)
+ * @method Health setLastBatteryStatus(int $status)
  */
-class VehicleHealth extends ModelAbstract
+class Health extends ModelAbstract
 {
 
     protected $_allowedProperties = [
@@ -25,12 +47,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $property
-     * @return VehicleHealth
+     * @return Health
      */
     public function setLastBatteryWarning($property)
     {
-        if (!is_object($property) || !$property instanceof VehicleBatteryEvent) {
-            $property = new VehicleBatteryEvent($property);
+        if (!is_object($property) || !$property instanceof BatteryEvent) {
+            $property = new BatteryEvent($property);
         }
 
         $this->_properties['LastBatteryWarning'] = $property;
@@ -39,12 +61,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $events
-     * @return VehicleHealth
+     * @return Health
      */
     public function setBatteryEventsForSelectedPeriod($events)
     {
-        if (!is_object($events) || !$events instanceof VehicleBatteryEventRowset) {
-            $events = new VehicleBatteryEventRowset($events);
+        if (!is_object($events) || !$events instanceof BatteryEventRowset) {
+            $events = new BatteryEventRowset($events);
         }
 
         $this->_properties['BatteryEventsForSelectedPeriod'] = $events;
@@ -53,12 +75,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $event
-     * @return VehicleHealth
+     * @return Health
      */
     public function setLastMILEvent($event)
     {
-        if (!is_object($event) || !$event instanceof VehicleMilEvent) {
-            $event = new VehicleMilEvent($event);
+        if (!is_object($event) || !$event instanceof MilEvent) {
+            $event = new MilEvent($event);
         }
 
         $this->_properties['LastMILEvent'] = $event;
@@ -67,12 +89,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $events
-     * @return VehicleHealth
+     * @return Health
      */
     public function setMILEventsForSelectedPeriod($events)
     {
-        if (!is_object($events) || !$events instanceof VehicleMilEventRowset) {
-            $events = new VehicleMilEventRowset($events);
+        if (!is_object($events) || !$events instanceof MilEventRowset) {
+            $events = new MilEventRowset($events);
         }
 
         $this->_properties['MILEventsForSelectedPeriod'] = $events;
@@ -81,12 +103,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $event
-     * @return VehicleHealth
+     * @return Health
      */
     public function setLastDTCEvent($event)
     {
-        if (!is_object($event) || !$event instanceof VehicleDtcEvent) {
-            $event = new VehicleDtcEvent($event);
+        if (!is_object($event) || !$event instanceof DtcEvent) {
+            $event = new DtcEvent($event);
         }
 
         $this->_properties['LastDTCEvent'] = $event;
@@ -95,12 +117,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $event
-     * @return VehicleHealth
+     * @return Health
      */
     public function setLastPendingDTCEvent($event)
     {
-        if (!is_object($event) || !$event instanceof VehicleDtcEvent) {
-            $event = new VehicleDtcEvent($event);
+        if (!is_object($event) || !$event instanceof DtcEvent) {
+            $event = new DtcEvent($event);
         }
 
         $this->_properties['LastPendingDTCEvent'] = $event;
@@ -109,12 +131,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $events
-     * @return VehicleHealth
+     * @return Health
      */
     public function setDTCEventsForSelectedPeriod($events)
     {
-        if (!is_object($events) || !$events instanceof VehicleDtcEventDetailRowset) {
-            $events = new VehicleDtcEventDetailRowset($events);
+        if (!is_object($events) || !$events instanceof DtcEventDetailRowset) {
+            $events = new DtcEventDetailRowset($events);
         }
 
         $this->_properties['DTCEventsForSelectedPeriod'] = $events;
@@ -123,12 +145,12 @@ class VehicleHealth extends ModelAbstract
 
     /**
      * @param array|object $events
-     * @return VehicleHealth
+     * @return Health
      */
     public function setPendingDTCEventsForSelectedPeriod($events)
     {
-        if (!is_object($events) || !$events instanceof VehicleDtcEventDetailRowset) {
-            $events = new VehicleDtcEventDetailRowset($events);
+        if (!is_object($events) || !$events instanceof DtcEventDetailRowset) {
+            $events = new DtcEventDetailRowset($events);
         }
 
         $this->_properties['PendingDTCEventsForSelectedPeriod'] = $events;

@@ -14,10 +14,10 @@ use Automile\Sdk\Models\TripRowset;
 use Automile\Sdk\Models\Trip as TripModel;
 use Automile\Sdk\Models\TripStartEndGeo;
 use Automile\Sdk\Models\TripSynchronized;
-use Automile\Sdk\Models\VehicleEngineCoolantTemperatureRowset;
-use Automile\Sdk\Models\VehicleFuelLevelInputRowset;
-use Automile\Sdk\Models\VehicleRPMRowset;
-use Automile\Sdk\Models\VehicleSpeedRowset;
+use Automile\Sdk\Models\Vehicle\EngineCoolantTemperatureRowset;
+use Automile\Sdk\Models\Vehicle\FuelLevelInputRowset;
+use Automile\Sdk\Models\Vehicle\RPMRowset;
+use Automile\Sdk\Models\Vehicle\SpeedRowset;
 
 /**
  * Trip API methods
@@ -97,7 +97,7 @@ trait Trip
     /**
      * Get the vehicle speed if it's reported by the vehicle
      * @param int $tripId
-     * @return VehicleSpeedRowset
+     * @return SpeedRowset
      * @throws AutomileException
      */
     public function getTripSpeed($tripId)
@@ -114,7 +114,7 @@ trait Trip
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new VehicleSpeedRowset($response->getBody());
+            return new SpeedRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());
@@ -123,7 +123,7 @@ trait Trip
     /**
      * Get the vehicle engine rpm if it's reported by the vehicle
      * @param int $tripId
-     * @return VehicleRPMRowset
+     * @return RPMRowset
      * @throws AutomileException
      */
     public function getTripRPM($tripId)
@@ -140,7 +140,7 @@ trait Trip
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new VehicleRPMRowset($response->getBody());
+            return new RPMRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());
@@ -175,7 +175,7 @@ trait Trip
     /**
      * Get the vehicle current fuel level if it's reported by the vehicle
      * @param int $tripId
-     * @return VehicleFuelLevelInputRowset
+     * @return FuelLevelInputRowset
      * @throws AutomileException
      */
     public function getTripFuelLevel($tripId)
@@ -192,7 +192,7 @@ trait Trip
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new VehicleFuelLevelInputRowset($response->getBody());
+            return new FuelLevelInputRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());
@@ -201,7 +201,7 @@ trait Trip
     /**
      * Get the engine coolant temperature if it's reported by the vehicle
      * @param $tripId
-     * @return VehicleEngineCoolantTemperatureRowset
+     * @return EngineCoolantTemperatureRowset
      * @throws AutomileException
      */
     public function getTripEngineCoolantTemperature($tripId)
@@ -218,7 +218,7 @@ trait Trip
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new VehicleEngineCoolantTemperatureRowset($response->getBody());
+            return new EngineCoolantTemperatureRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());

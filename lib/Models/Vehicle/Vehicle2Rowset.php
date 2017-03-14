@@ -1,6 +1,8 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelRowsetAbstract;
 
 /**
  * Model Rowset to operate with Vehicle models

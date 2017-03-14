@@ -4,8 +4,8 @@ namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\VehiclePlace as VehiclePlaceModel;
-use Automile\Sdk\Models\VehiclePlaceRowset;
+use Automile\Sdk\Models\Vehicle\Place as VehiclePlaceModel;
+use Automile\Sdk\Models\Vehicle\PlaceRowset;
 
 /**
  * VehiclePlace API Queries
@@ -28,7 +28,7 @@ trait VehiclePlace
     /**
      * Get all relationships between places and vehicles
      * @param int $placeId
-     * @return VehiclePlaceRowset
+     * @return PlaceRowset
      * @throws AutomileException
      */
     public function getVehiclePlacesByPlaceId($placeId)
@@ -46,7 +46,7 @@ trait VehiclePlace
         $isSuccessful = $client->send($request, $response);
 
         if ($isSuccessful) {
-            return new VehiclePlaceRowset($response->getBody());
+            return new PlaceRowset($response->getBody());
         }
 
         throw new AutomileException($response->getErrorMessage());

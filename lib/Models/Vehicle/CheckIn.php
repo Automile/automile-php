@@ -1,11 +1,29 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelAbstract;
+use Automile\Sdk\Models\ModelException;
+use Automile\Sdk\Types\DeviceType;
+use Automile\Sdk\Types\TripType;
 
 /**
  * Class VehicleCheckIn
+ *
+ * @see TripType
+ * @see DeviceType
+ *
+ * @method int getContactId()
+ * @method int getVehicleId()
+ * @method int getDefaultTripType()
+ * @method int getUserDeviceType()
+ * @method string getUserDeviceToken()
+ *
+ * @method CheckIn setContactId(int $contactId)
+ * @method CheckIn setVehicleId(int $vehicleId)
+ * @method CheckIn setUserDeviceToken(string $token)
  */
-class VehicleCheckIn extends ModelAbstract
+class CheckIn extends ModelAbstract
 {
 
     protected $_allowedProperties = [
@@ -18,15 +36,15 @@ class VehicleCheckIn extends ModelAbstract
     ];
 
     /**
+     * @see TripType
      * @param string $tripType
-     * @return VehicleCheckIn
+     * @return CheckIn
      * @throws ModelException
      */
     public function setDefaultTripType($tripType)
     {
-        $allowedValues = [0, 1, 2, 3];
-        if (!in_array($tripType, $allowedValues)) {
-            throw new ModelException("Trip Type value is out of range, allowed values: [" . implode(', ', $allowedValues) . "]");
+        if (!TripType::isValid($tripType)) {
+            throw new ModelException("Trip Type value is out of range");
         }
 
         $this->_properties['DefaultTripType'] = $tripType;
@@ -35,8 +53,25 @@ class VehicleCheckIn extends ModelAbstract
     }
 
     /**
+     * @see DeviceType
+     * @param string $deviceType
+     * @return CheckIn
+     * @throws ModelException
+     */
+    public function setUserDeviceType($deviceType)
+    {
+        if (!DeviceType::isValid($deviceType)) {
+            throw new ModelException("Device Type value is out of range");
+        }
+
+        $this->_properties['UserDeviceType'] = $deviceType;
+
+        return $this;
+    }
+
+    /**
      * @param string|\DateTime $dateTime a DateTime object or date in string representation
-     * @return VehicleCheckIn
+     * @return CheckIn
      */
     public function setCheckOutAtUtc($dateTime)
     {

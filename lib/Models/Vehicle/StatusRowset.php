@@ -1,21 +1,23 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelRowsetAbstract;
 
 /**
  * Vehicle2Status Rowset
  */
-class Vehicle2StatusRowset extends ModelRowsetAbstract
+class StatusRowset extends ModelRowsetAbstract
 {
 
     /**
      * Create new model to be added into the rowset
      * @param array|object $properties
-     * @return ModelAbstract
+     * @return Status
      */
     public function getModel($properties)
     {
-        return new Vehicle2Status($properties);
+        return new Status($properties);
     }
 
 }

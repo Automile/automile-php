@@ -2,13 +2,12 @@
 
 namespace Automile\Sdk\Endpoints;
 
-
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\Vehicle2;
-use Automile\Sdk\Models\Vehicle2Rowset;
-use Automile\Sdk\Models\Vehicle2StatusRowset;
-use Automile\Sdk\Models\VehicleCheckIn;
+use Automile\Sdk\Models\Vehicle\Vehicle2;
+use Automile\Sdk\Models\Vehicle\Vehicle2Rowset;
+use Automile\Sdk\Models\Vehicle\StatusRowset;
+use Automile\Sdk\Models\Vehicle\CheckIn;
 
 /**
  * Vehicle API methods
@@ -39,20 +38,20 @@ trait Vehicle
 
     /**
      * Get position and status of all vehicles that the user has access to
-     * @return Vehicle2StatusRowset
+     * @return StatusRowset
      */
     public function getStatusForVehicles()
     {
-        return $this->_getAll($this->_vehicleUri . '/status', new Vehicle2StatusRowset());
+        return $this->_getAll($this->_vehicleUri . '/status', new StatusRowset());
     }
 
     /**
      * Check-in to a vehicle
-     * @param VehicleCheckIn $checkIn
+     * @param CheckIn $checkIn
      * @return bool
      * @throws AutomileException
      */
-    public function checkInToVehicle(VehicleCheckIn $checkIn)
+    public function checkInToVehicle(CheckIn $checkIn)
     {
         $request = Config::getNewRequest();
         $response = Config::getNewResponse();

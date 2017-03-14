@@ -1,25 +1,47 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
 
 use Automile\Sdk\Exceptions\InvalidArgumentException;
+use Automile\Sdk\Models\ModelAbstract;
 
 /**
- * GeographicPosition Model
+ * VehicleDtcEvent Model
  *
+ * @method string getOccured()
+ * @method DtcEventDetailRowset getDTCEventDetails()
  * @method float getLatitude()
  * @method float getLongitude()
+ *
+ * @method DtcEvent setOccured(string $occured)
  */
-class GeographicPosition extends ModelAbstract
+class DtcEvent extends ModelAbstract
 {
 
     protected $_allowedProperties = [
-        'Latitude', 'Longitude'
+        'Occured',
+        'DTCEventDetails',
+        'Latitude',
+        'Longitude'
     ];
 
     /**
+     * @param array|object $event
+     * @return DtcEvent
+     */
+    public function setDTCEventDetails($event)
+    {
+        if (!is_object($event) || !$event instanceof DtcEventDetailRowset) {
+            $event = new DtcEventDetailRowset($event);
+        }
+
+        $this->_properties['DTCEventDetails'] = $event;
+        return $this;
+    }
+
+    /**
      * @param float $lat
-     * @return GeographicPosition
+     * @return DtcEvent
      * @throws InvalidArgumentException
      */
     public function setLatitude($lat)
@@ -35,7 +57,7 @@ class GeographicPosition extends ModelAbstract
 
     /**
      * @param float $lng
-     * @return GeographicPosition
+     * @return DtcEvent
      * @throws InvalidArgumentException
      */
     public function setLongitude($lng)

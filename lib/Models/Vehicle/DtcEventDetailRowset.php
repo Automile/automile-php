@@ -1,21 +1,23 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelRowsetAbstract;
 
 /**
  * VehicleDtcEventDetail Rowset Model
  */
-class VehicleDtcEventDetailRowset extends ModelRowsetAbstract
+class DtcEventDetailRowset extends ModelRowsetAbstract
 {
 
     /**
      * Create new model to be added into the rowset
      * @param array|object $properties
-     * @return VehicleDtcEventDetail
+     * @return DtcEventDetail
      */
     public function getModel($properties)
     {
-        return new VehicleDtcEventDetail($properties);
+        return new DtcEventDetail($properties);
     }
 
 }

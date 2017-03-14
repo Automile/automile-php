@@ -4,7 +4,7 @@ namespace Automile\Sdk\Endpoints;
 
 use Automile\Sdk\AutomileException;
 use Automile\Sdk\Config;
-use Automile\Sdk\Models\VehicleHealth as VehicleHealthModel;
+use Automile\Sdk\Models\Vehicle\Health as VehicleHealthModel;
 
 /**
  * VehicleHealth API Queries

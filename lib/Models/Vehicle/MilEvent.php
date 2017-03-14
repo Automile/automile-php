@@ -1,25 +1,43 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
 
 use Automile\Sdk\Exceptions\InvalidArgumentException;
+use Automile\Sdk\Models\ModelAbstract;
 
 /**
- * GeographicPosition Model
+ * VehicleMilEvent Model
  *
+ * @method string getOccured()
+ * @method int getMILStatus()
+ * @method int getMILDistance()
+ * @method float getCLRDistanceUntilToday()
+ * @method string getNumberOfDTCs()
  * @method float getLatitude()
  * @method float getLongitude()
+ *
+ * @method string setOccured(string $occured)
+ * @method int setMILStatus(int $status)
+ * @method int setMILDistance(int $distance)
+ * @method float setCLRDistanceUntilToday(float $distance)
+ * @method string setNumberOfDTCs(string $number)
  */
-class GeographicPosition extends ModelAbstract
+class MilEvent extends ModelAbstract
 {
 
     protected $_allowedProperties = [
-        'Latitude', 'Longitude'
+        'Occured',
+        'MILStatus',
+        'MILDistance',
+        'CLRDistanceUntilToday',
+        'NumberOfDTCs',
+        'Latitude',
+        'Longitude'
     ];
 
     /**
      * @param float $lat
-     * @return GeographicPosition
+     * @return MilEvent
      * @throws InvalidArgumentException
      */
     public function setLatitude($lat)
@@ -35,7 +53,7 @@ class GeographicPosition extends ModelAbstract
 
     /**
      * @param float $lng
-     * @return GeographicPosition
+     * @return MilEvent
      * @throws InvalidArgumentException
      */
     public function setLongitude($lng)

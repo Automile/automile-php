@@ -1,21 +1,23 @@
 <?php
 
-namespace Automile\Sdk\Models;
+namespace Automile\Sdk\Models\Vehicle;
+
+use Automile\Sdk\Models\ModelRowsetAbstract;
 
 /**
  * VehicleBatteryEvent Rowset Model
  */
-class VehicleBatteryEventRowset extends ModelRowsetAbstract
+class BatteryEventRowset extends ModelRowsetAbstract
 {
 
     /**
      * Create new model to be added into the rowset
      * @param array|object $properties
-     * @return VehicleBatteryEvent
+     * @return BatteryEvent
      */
     public function getModel($properties)
     {
-        return new VehicleBatteryEvent($properties);
+        return new BatteryEvent($properties);
     }
 
 }
