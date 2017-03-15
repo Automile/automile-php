@@ -11,6 +11,7 @@
   },
   "vehicle_inspection": {
     "id": 0,
-    "vehicle_id": 0
+    "vehicle_id": 0,
+    "export_email": "..."
   }
 }

@@ -13,8 +13,8 @@ use Automile\Sdk\Types\ContentType;
  * @method int getExpenseReportRowId()
  * @method int getContentType()
  * @method string getContentFileName()
- * @method string getData()
- * @method string getDataFile()
+ * @method string getData() base64-encoded raw data upon uploading
+ * @method string getDataFile() path to the attachment file upon uploading
  *
  * @method ExpenseReportRowContent setExpenseReportRowContentId(int $expenseReportRowContentId)
  * @method ExpenseReportRowContent setExpenseReportRowId(int $expenseReportRowId)

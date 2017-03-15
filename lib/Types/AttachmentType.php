@@ -3,19 +3,27 @@
 namespace Automile\Sdk\Types;
 
 /**
- * ContentType Enum
+ * Attachment Type
  */
-class ContentType implements Type
+class AttachmentType implements Type
 {
 
     const IMAGE = 0;
     const PDF = 1;
-    const VOICE = 2;
+    const DOCX = 2;
     const EXCEL = 3;
-    const WORD = 4;
 
     /**
-     * determine content type by file extension
+     * @param mixed $value
+     * @return bool
+     */
+    public static function isValid($value)
+    {
+        return in_array($value, rante(0, 3));
+    }
+
+    /**
+     * determine attachment type by file extension
      * @param string $filename
      * @return int
      */
@@ -40,24 +48,9 @@ class ContentType implements Type
             case 'xlsx':
                 return self::EXCEL;
 
-            case 'mp3':
-            case 'wav':
-            case 'ogg':
-                return self::VOICE;
-
-            case 'doc':
             case 'docx':
-                return self::WORD;
+                return self::DOCX;
         }
-    }
-
-    /**
-     * @param mixed $value
-     * @return bool
-     */
-    public static function isValid($value)
-    {
-        return in_array($value, rante(0, 4));
     }
 
 }

@@ -24,9 +24,6 @@ use Automile\Sdk\Models\ModelAbstract;
  * @method Defect setCreatedByContactId(int $contactId)
  * @method Defect setNotes(string $notes)
  * @method Defect setDefectStatusType(int $statusType)
- * @method Defect setVehicleDefectStatus(array|object $statuses)
- * @method Defect setVehicleDefectAttachments(array|object $attachments)
- * @method Defect setVehicleDefectComments(array|object $comments)
  */
 class Defect extends ModelAbstract
 {
@@ -43,6 +40,48 @@ class Defect extends ModelAbstract
 		'VehicleDefectAttachments',
 		'VehicleDefectComments'
     ];
+
+    /**
+     * @param array|object $status
+     * @return Defect
+     */
+    public function setVehicleDefectStatus($status)
+    {
+        if (!is_object($status) || !$status instanceof DefectStatusRowset) {
+            $status = new DefectStatusRowset($status);
+        }
+
+        $this->_properties['VehicleDefectStatus'] = $status;
+        return $this;
+    }
+
+    /**
+     * @param array|object $comments
+     * @return Defect
+     */
+    public function setVehicleDefectComments($comments)
+    {
+        if (!is_object($comments) || !$comments instanceof DefectCommentRowset) {
+            $comments = new DefectCommentRowset($comments);
+        }
+
+        $this->_properties['VehicleDefectComments'] = $comments;
+        return $this;
+    }
+
+    /**
+     * @param array|object $attachments
+     * @return Defect
+     */
+    public function setVehicleDefectAttachments($attachments)
+    {
+        if (!is_object($attachments) || !$attachments instanceof DefectAttachmentRowset) {
+            $attachments = new DefectAttachmentRowset($attachments);
+        }
+
+        $this->_properties['VehicleDefectAttachments'] = $attachments;
+        return $this;
+    }
 
     /**
      * @param string|\DateTime $dateTime a DateTime object or date in string representation
