@@ -81,7 +81,7 @@ abstract class TestAbstract extends TestCase
 
         $settings = json_decode(file_get_contents($config), true);
         if (!$settings) {
-            throw new TestException("Settings not found");
+            throw new TestException("Invalid config file");
         }
 
         return $settings;
