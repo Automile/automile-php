@@ -1,0 +1,16 @@
+{
+  "client": {
+    "username": "...",
+    "password": "...",
+    "api_client": "...",
+    "api_secret": "..."
+  },
+  "vehicle": {
+    "id": 0,
+    "contact_id": 0
+  },
+  "vehicle_inspection": {
+    "id": 0,
+    "vehicle_id": 0
+  }
+}
