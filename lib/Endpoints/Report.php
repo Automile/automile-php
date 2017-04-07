@@ -53,7 +53,7 @@ trait Report
      *
      * @param string $datePeriod acceptable formats: yyyy[mm], yyyy[mm]-yyyy[mm]
      * @param int $vehicleId
-     * @return mixed
+     * @return VehicleSummary
      * @throws InvalidArgumentException
      * @throws AutomileException
      *

@@ -9,6 +9,7 @@ use Automile\Sdk\Models\ModelAbstract;
  * VehicleSummary Report Model
  *
  * @method int getVehicleId()
+ * @method int setVehicleId()
  * @method DistanceRowset getDistanceReports()
  * @method FuelRowset getFuelReports()
  * @method TravelTimeRowset getTravelTimeReports()
@@ -51,7 +52,7 @@ class VehicleSummary extends ModelAbstract
             $rows = new FuelRowset($rows);
         }
 
-        $this->_properties['FuelReportsReports'] = $rows;
+        $this->_properties['FuelReports'] = $rows;
         return $this;
     }
 
