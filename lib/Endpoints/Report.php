@@ -5,6 +5,7 @@ namespace Automile\Sdk\Endpoints;
 use Automile\Sdk\Exceptions\AutomileException;
 use Automile\Sdk\Config;
 use Automile\Sdk\Exceptions\InvalidArgumentException;
+use Automile\Sdk\Models\GeofenceReport;
 use Automile\Sdk\Models\Report\TripEmail;
 use Automile\Sdk\Models\Report\TripSummaryRowset;
 use Automile\Sdk\Models\Report\VehicleSummary;
@@ -120,6 +121,38 @@ trait Report
 
         $errorMessage = $response->getErrorMessage();
         throw new AutomileException($errorMessage ?: "Error code: {$response->getStatusCode()}");
+    }
+
+    /**
+     * @param int $vehicleId
+     * @param int $geofenceId
+     * @param \DateTime|null $fromDate
+     * @param \DateTime|null $toDate
+     * @return GeofenceReport
+     * @throws AutomileException
+     */
+    public function getGeofenceLog($vehicleId = null, $geofenceId = null, \DateTime $fromDate = null, \DateTime $toDate = null)
+    {
+        $request = Config::getNewRequest();
+        $response = Config::getNewResponse();
+        $client = Config::getNewHttpClient();
+
+        $this->_authorizeRequest($request);
+
+        $request->setMethod(Config::METHOD_GET)
+            ->setUri($this->_reportUri . '/geofencelog')
+            ->setUriParam('vehicleId', $vehicleId)
+            ->setUriParam('geofenceId', $geofenceId)
+            ->setUriParam('fromDate', $fromDate ? $fromDate->format('Y-m-d') : null)
+            ->setUriParam('toDate', $toDate ? $toDate->format('Y-m-d') : null);
+
+        $isSuccessful = $client->send($request, $response);
+
+        if ($isSuccessful) {
+            return new GeofenceReport($response->getBody());
+        }
+
+        throw new AutomileException($response->getErrorMessage());
     }
 
 }
