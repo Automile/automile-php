@@ -83,7 +83,7 @@ abstract class ModelAbstract
                         }
                         break;
                     case 'get':
-                        return empty($this->_properties[$property]) ? null : $this->_properties[$property];
+                        return is_null($this->_properties[$property]) ? null : $this->_properties[$property];
                 }
             }
         }

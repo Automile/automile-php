@@ -8,10 +8,9 @@ use Automile\Sdk\Models\ModelAbstract;
  * VehicleRPM Model
  *
  * @method float getRPMValue()
- * @method string getRecordTimeStamp()
+ * @method \DateTime getRecordTimeStamp()
  *
  * @method RPM setRPMValue(float $rpm)
- * @method RPM setRecordTimeStamp(string $timeStamp)
  */
 class RPM extends ModelAbstract
 {
@@ -20,5 +19,34 @@ class RPM extends ModelAbstract
         "RPMValue",
         "RecordTimeStamp"
     ];
+
+    /**
+     * @param string|\DateTime $date
+     * @return RPM
+     */
+    public function setRecordTimeStamp($date)
+    {
+        if (!$date instanceof \DateTime) {
+            $date = new \DateTime($date, new \DateTimeZone('UTC'));
+        }
+        $this->_properties['RecordTimeStamp'] = $date;
+
+        return $this;
+    }
+
+    /**
+     * convert the model to an array
+     * @return array
+     */
+    public function toArray()
+    {
+        $values = parent::toArray();
+
+        if (!empty($values['RecordTimeStamp'])) {
+            $values['RecordTimeStamp'] = $values['RecordTimeStamp']->format('c');
+        }
+
+        return $values;
+    }
 
 }
