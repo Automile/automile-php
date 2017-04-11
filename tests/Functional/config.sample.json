@@ -18,5 +18,9 @@
     "vehicle_id": 0,
     "geofence_id": 0,
     "email": "..."
+  },
+  "trip": {
+    "id": 0,
+    "pid_id": 0
   }
 }
